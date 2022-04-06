@@ -6,41 +6,38 @@
 #    By: kokim <kokim@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/04 13:11:14 by kokim             #+#    #+#              #
-#    Updated: 2022/04/06 15:44:58 by kokim            ###   ########.fr        #
+#    Updated: 2022/04/06 16:41:24 by kokim            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = minitalk 
+NAME = client 
 
-CLIDIR = ./client/
+CC	= gcc
+CFLAGS	= -Wall -Wextra -Werror 
 
-SERDIR = ./server/
+RM	= rm -rf
 
-LFDIR = ./libft/
+CLIENT_SRC = client.c
 
-all :
-	@$(MAKE) -C $(LFDIR)
-	@$(MAKE) -C $(CLIDIR)
-	@$(MAKE) -C $(SERDIR)
-	@echo " $(NAME) was compiled!!"
+CLIENT_OBJ = $(CLIENT_SRC:.c=.o)
 
-bonus :
-	@$(MAKE) -C $(LFDIR) bonus
-	@$(MAKE) -C $(CLIDIR) bonus
-	@$(MAKE) -C $(SERDIR) bonus
-	@echo " $(NAME) bonus was compiled!!"
+LIBFT = ../libft/
+
+LILNK = -lft -L$(LIBFT)
+
+all : $(NAME)
+
+$(NAME) : $(CLIENT_OBJ)
+	@$(CC) $(CFLAGS) $(LILNK) $< -o $@
+
+%.o : %.c 
+	@$(CC) $(CFLAGS) $< -c -o $@
 
 clean :
-	@$(MAKE) -C $(LFDIR) clean
-	@$(MAKE) -C $(CLIDIR) clean
-	@$(MAKE) -C $(SERDIR) clean
-	@echo " $(NAME)'s object files was deleted!!"
+	$(RM) $(CLIENT_OBJ) 
 
-fclean : 
-	@$(MAKE) -C $(LFDIR) fclean
-	@$(MAKE) -C $(CLIDIR) fclean
-	@$(MAKE) -C $(SERDIR) fclean
-	@echo " $(NAME) was deleted!!"
+fclean : clean
+	$(RM) $(NAME)
 
 re : fclean all
 
