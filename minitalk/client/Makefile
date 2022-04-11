@@ -6,7 +6,7 @@
 #    By: kokim <kokim@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/04 13:11:14 by kokim             #+#    #+#              #
-#    Updated: 2022/04/06 16:41:24 by kokim            ###   ########.fr        #
+#    Updated: 2022/04/11 13:47:37 by kokim            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,23 +21,25 @@ CLIENT_SRC = client.c
 
 CLIENT_OBJ = $(CLIENT_SRC:.c=.o)
 
-LIBFT = ../libft/
+LIBFT = ../library/libft/
+LILNK = -L $(LIBFT) -lft
 
-LILNK = -lft -L$(LIBFT)
+PF = ../library/printf/
+PFLNK = -L $(PF) -lftprintf
 
 all : $(NAME)
 
 $(NAME) : $(CLIENT_OBJ)
-	@$(CC) $(CFLAGS) $(LILNK) $< -o $@
+	@$(CC) $(CFLAGS) $(LILNK) $(PFLNK) $^ -o $@
 
 %.o : %.c 
 	@$(CC) $(CFLAGS) $< -c -o $@
 
 clean :
-	$(RM) $(CLIENT_OBJ) 
+	@$(RM) $(CLIENT_OBJ) 
 
 fclean : clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 
 re : fclean all
 

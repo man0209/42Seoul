@@ -6,7 +6,7 @@
 /*   By: kokim <kokim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 14:02:02 by kokim             #+#    #+#             */
-/*   Updated: 2022/04/06 15:42:36 by kokim            ###   ########.fr       */
+/*   Updated: 2022/04/11 14:07:34 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,18 @@
 # include <unistd.h>
 # include <signal.h>
 # include <stdlib.h>
-# include "../libft/libft.h"
+# include "../library/libft/libft.h"
+# include "../library/printf/ft_printf.h"
 
-typedef struct s_request
+typedef struct s_minitalk
 {
-	struct sigaction	phase_send_connection;
-	struct sigaction	phase_send_msglen;
-	struct sigaction	phase_send_msg;
+	struct sigaction	a;
+	struct sigaction	b;
+	struct sigaction	c;
 	pid_t				clipid;
 	pid_t				srvpid;
-	int					len;
-	char				*msg;
-}	t_request;
+	int					index;
+	char				msg;
+}	t_minitalk;
 
 #endif
