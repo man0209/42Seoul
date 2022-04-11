@@ -6,7 +6,7 @@
 #    By: kokim <kokim@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/04 13:11:14 by kokim             #+#    #+#              #
-#    Updated: 2022/04/06 16:42:42 by kokim            ###   ########.fr        #
+#    Updated: 2022/04/11 13:46:05 by kokim            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,13 +21,16 @@ SERVER_SRC = server.c
 
 SERVER_OBJ = $(SERVER_SRC:.c=.o)
 
-LIBFT = ../libft/
-LFLNK = -lft -L$(LIBFT)
+LIBFT = ../library/libft/ 
+LFLNK = -L $(LIBFT) -lft
+
+FT = ../library/printf/
+FTLNK = -L $(FT) -lftprintf
 
 all : $(NAME)
 
-$(SERVER) : $(SERVER_OBJ)
-	@$(CC) $(CFLAGS) $(LFLNK) $< -o $@
+$(NAME) : $(SERVER_OBJ)
+	@$(CC) $(CFLAGS) $(LFLNK) $(FTLNK) $^ -o $@
 
 %.o : %.c
 	@$(CC) $(CFLAGS) $< -c -o $@
