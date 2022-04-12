@@ -6,38 +6,44 @@
 /*   By: kokim <kokim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 13:08:48 by kokim             #+#    #+#             */
-/*   Updated: 2022/04/11 13:42:33 by kokim            ###   ########.fr       */
+/*   Updated: 2022/04/12 16:02:43 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "server.h"
 
-void	bit_to_str(int sig)
-{
-	static	int	i;
-	static	int	bit;
+t_request	g_server;
 
-	if (sig == SIGUSR1)
-		ft_putstr("hi\n");
-	i++;
-	if (i == 8)
+void	ser_sighandler_ready(int signu, siginfo_t *info, void *data)
+{
+	(void)data;
+	(void)signu;
+	if (signu == SIGUSR1)
 	{
-		ft_putchar(bit);
-		i = 0;
-		bit = 0;
+		g_server.clipid = info->si_pid;
+		ft_printf("g_request.client_pid : %d\n", g_server.clipid);
+		kill(g_server.clipid, SIGUSR1);
 	}
 }
-
-int	main()
+void	server_sa_initialize(struct sigaction *sa, \
+		void (*f)(int, siginfo_t *, void *))
 {
-	pid_t	pid;
+	sa->sa_sigaction = f;
+	sa->sa_flags = SA_SIGINFO;
+	sigemptyset(&sa->sa_mask);
+	sigaddset(&sa->sa_mask, SIGUSR1);
+	sigaddset(&sa->sa_mask, SIGUSR2);
+}
 
-	pid = getpid();
 
-	ft_printf("pid : %d\n", pid);
-	signal(SIGUSR1, bit_to_str);
-	signal(SIGUSR2, bit_to_str);
+int	main(void)
+{
+	print_server_pid();
+	server_sa_initialize(&g_server.sa_ready, &ser_sighandler_ready);
+	sigaction(SIGUSR1, &g_server.sa_a, NULL);
 	while (1)
+	{
 		pause();
+	}
 }
 

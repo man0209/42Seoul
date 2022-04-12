@@ -6,7 +6,7 @@
 /*   By: kokim <kokim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 13:08:38 by kokim             #+#    #+#             */
-/*   Updated: 2022/04/11 14:07:43 by kokim            ###   ########.fr       */
+/*   Updated: 2022/04/12 13:57:03 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,6 @@ int main(int ac, char **av)
 	if ( pid < 100 || pid > 99998)
 		exit(1);
 	//send_str_to_server(pid, av[2]);
-	ft_printf("%d\n", SIGUSR1);
+	ft_printf("clipid : %d\n", getpid());
+	kill (pid, SIGUSR1);
 }

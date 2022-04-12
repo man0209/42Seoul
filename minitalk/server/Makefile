@@ -6,7 +6,7 @@
 #    By: kokim <kokim@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/04 13:11:14 by kokim             #+#    #+#              #
-#    Updated: 2022/04/11 13:46:05 by kokim            ###   ########.fr        #
+#    Updated: 2022/04/12 13:19:38 by kokim            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CFLAGS	= -Wall -Wextra -Werror
 
 RM	= rm -rf
 
-SERVER_SRC = server.c
+SERVER_SRC = server.c server_uti.c
 
 SERVER_OBJ = $(SERVER_SRC:.c=.o)
 
