@@ -11,30 +11,36 @@
 /* ************************************************************************** */
 
 #include "client.h"
-/*
-void	send_str_to_server(pid_t pid, char *str)
-{
-	int	i;
-	int	bit;
+#include <stdio.h>
+#include <unistd.h>
 
-	i = 0;
-	bit = 7;
-	while (str[i])
+void	send_msg_to_server(pid_t pid, char *str)
+{
+	unsigned int	sig;
+	
+	int index = 0;
+	while (str[index])
 	{
-		while (bit >= 0)
+		sig = 0;
+		int i = 8;
+		printf("%c", str[index]);
+		while (--i >= 0)
 		{
-			if ((str[i] >> 7) & 1)
+			sig = str[index] >> i & 1 ;
+			if (sig)
 				kill(pid, SIGUSR1);
 			else
+			{
 				kill(pid, SIGUSR2);
-			usleep(150);
-			bit--;
+			}
+			
+			printf("%d", sig);		
+			usleep(100);
 		}
-		i++;
+		printf("      ");
+		index++;
 	}
 }
-*/
-
 
 int main(int ac, char **av)
 {
@@ -42,10 +48,8 @@ int main(int ac, char **av)
 
 	if (ac != 3 || !(av[2]))
 		exit(1);
-	pid = ft_atoi(av[1]);
+	pid = atoi(av[1]);
 	if ( pid < 100 || pid > 99998)
 		exit(1);
-	//send_str_to_server(pid, av[2]);
-	ft_printf("clipid : %d\n", getpid());
-	kill (pid, SIGUSR1);
+	send_msg_to_server(pid, av[2]);
 }

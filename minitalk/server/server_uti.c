@@ -11,12 +11,13 @@
 /* ************************************************************************** */
 
 #include "server.h"
+#include <stdio.h>
 
 t_request g_request;
 
 void	print_server_pid(void)
 {
-	ft_printf("server PID is : [ %d ] \n", getpid());
+	printf("server PID is : [ %d ] \n", getpid());
 	return ;
 }
 

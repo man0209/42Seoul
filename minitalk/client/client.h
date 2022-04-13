@@ -19,15 +19,5 @@
 # include "../library/libft/libft.h"
 # include "../library/printf/ft_printf.h"
 
-typedef struct s_minitalk
-{
-	struct sigaction	a;
-	struct sigaction	b;
-	struct sigaction	c;
-	pid_t				clipid;
-	pid_t				srvpid;
-	int					index;
-	char				msg;
-}	t_minitalk;
 
 #endif

@@ -21,11 +21,8 @@
 
 typedef struct s_request
 {
-	struct sigaction	sa_ready;
-	struct sigaction	sa_char;
-	struct sigaction	sa_bit;
-	pid_t				clipid;
-	pid_t				srvpid;
+	struct sigaction	sa_bit_to_msg;
+	pid_t				received_pid;
 }	t_request;
 
 /* 서버 pid 출력 */

@@ -11,22 +11,56 @@
 /* ************************************************************************** */
 
 #include "server.h"
+#include <stdio.h>
+#include <unistd.h>
 
 t_request	g_server;
 
-void	ser_sighandler_ready(int signu, siginfo_t *info, void *data)
+// 10진수 -> 2진수 변환 (재귀적 버전)
+void ten_to_two_j(int n)
+{
+	if (n < 2)
+	{ // n==1 (이전 n이 2이거나 3)
+		printf("%d", n);
+	}
+	else
+	{
+		ten_to_two_j(n / 2);
+		printf("%d", n % 2);
+	}
+}
+
+void	bit_to_msg(int signu, siginfo_t *info, void *data)
 {
 	(void)data;
 	(void)signu;
+
+	static int	index;
+	static int	bit;
+	g_server.received_pid = info->si_pid;
+	//printf("g_request.client_pid : %d\n", g_server.received_pid); //ft_ 로 수정
+	//kill(g_server.received_pid, SIGUSR1);
+		//printf("g_server.bit = %d\n", g_server.bit);
+		//printf("g_server.index = %d\n", g_server.index);
 	if (signu == SIGUSR1)
 	{
-		g_server.clipid = info->si_pid;
-		ft_printf("g_request.client_pid : %d\n", g_server.clipid);
-		kill(g_server.clipid, SIGUSR1);
+		bit += 1 << (7 - index);
 	}
+	index++;
+
+	if (index == 8)
+	{
+		ten_to_two_j(bit);
+		printf("\n");
+		write(1, &bit, 1);
+		printf("  ");
+		index = 0;
+		bit = 0;
+	}	
 }
-void	server_sa_initialize(struct sigaction *sa, \
-		void (*f)(int, siginfo_t *, void *))
+
+void server_sa_initialize(struct sigaction *sa, \
+void (*f)(int, siginfo_t *, void *))
 {
 	sa->sa_sigaction = f;
 	sa->sa_flags = SA_SIGINFO;
@@ -39,8 +73,11 @@ void	server_sa_initialize(struct sigaction *sa, \
 int	main(void)
 {
 	print_server_pid();
-	server_sa_initialize(&g_server.sa_ready, &ser_sighandler_ready);
-	sigaction(SIGUSR1, &g_server.sa_a, NULL);
+	server_sa_initialize(&g_server.sa_bit_to_msg, &bit_to_msg);	
+
+	sigaction(SIGUSR1, &g_server.sa_bit_to_msg, NULL);
+	sigaction(SIGUSR2, &g_server.sa_bit_to_msg, NULL);
+
 	while (1)
 	{
 		pause();
