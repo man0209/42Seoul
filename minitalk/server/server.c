@@ -6,60 +6,55 @@
 /*   By: kokim <kokim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 13:08:48 by kokim             #+#    #+#             */
-/*   Updated: 2022/04/12 16:02:43 by kokim            ###   ########.fr       */
+/*   Updated: 2022/04/14 15:48:51 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "server.h"
-#include <stdio.h>
-#include <unistd.h>
 
 t_request	g_server;
 
-// 10진수 -> 2진수 변환 (재귀적 버전)
-void ten_to_two_j(int n)
-{
-	if (n < 2)
-	{ // n==1 (이전 n이 2이거나 3)
-		printf("%d", n);
-	}
-	else
-	{
-		ten_to_two_j(n / 2);
-		printf("%d", n % 2);
-	}
-}
-
-void print_server_pid(void)
-{
-	printf("server PID is : [ %d ] \n", getpid());
-	return;
-}
-
-void	bit_to_msg(int signu, siginfo_t *info, void *data)
+void	ser_check_con_pre(int signu, siginfo_t *info, void *data)
 {
 	(void)data;
-	(void)signu;
+	if (signu == SIGUSR1)
+	{
+		g_server.received_pid = info->si_pid;
+		ft_printf("Connected Client's pid : %d\n", g_server.received_pid);
+		kill(g_server.received_pid, SIGUSR1);
+	}
+	else
+		ft_printf("Not yet ready\n");
+}
+/*
+void	ser_get_char(int signu, siginfo_t *info, void *data)
+{
+	if (signu == SIGUSR1)
+	{
 
-	g_server.received_pid = info->si_pid;
-	//printf("g_request.client_pid : %d\n", g_server.received_pid); //ft_ 로 수정
-	if ()
-	//kill(g_server.received_pid, SIGUSR1);
+}
+*/
+void	ser_bit_to_msg(int signu, siginfo_t *info, void *data)
+{
+	(void)data;
+	
+	if (g_server.received_pid != info->si_pid)
+		kill(info->si_pid, SIGUSR2);
+
 	if (signu == SIGUSR1)
 	{
 		g_server.bit += 1 << (7 - g_server.index);
 	}
 	g_server.index++;
-
+	
 	if (g_server.index == 8)
 	{
-		//ten_to_two_j(g_server.bit);
-		//printf("\n ");
 		write(1, &g_server.bit, 1);
-		//printf("  ");
 		g_server.index = 0;
 		g_server.bit = 0;
-	}	
+		g_server.flag = 1;
+		kill(g_server.received_pid, SIGUSR2);
+	}
 }
 
 void server_sa_initialize(struct sigaction *sa, \
@@ -72,18 +67,17 @@ void (*f)(int, siginfo_t *, void *))
 	sigaddset(&sa->sa_mask, SIGUSR2);
 }
 
-
 int	main(void)
 {
-	print_server_pid();
-	server_sa_initialize(&g_server.sa_bit_to_msg, &bit_to_msg);	
-
-	sigaction(SIGUSR1, &g_server.sa_bit_to_msg, NULL);
-	sigaction(SIGUSR2, &g_server.sa_bit_to_msg, NULL);
+	ft_printf("server PID is : [ %d ] \n", getpid());
+	server_sa_initialize(&g_server.sa_ser_check_pre, &ser_check_con_pre);	
+//	server_sa_initialize(&g_server.sa_ser_get_char, &ser_get_char);	
+	server_sa_initialize(&g_server.sa_ser_bit_to_msg, &ser_bit_to_msg);
 
 	while (1)
 	{
-		pause();
+		ser_check_connection_pre();
+		ser_print_msg();
 	}
-}
-
+		return (0);
+}	

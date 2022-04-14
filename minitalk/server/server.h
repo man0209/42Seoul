@@ -6,7 +6,7 @@
 /*   By: kokim <kokim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 14:02:32 by kokim             #+#    #+#             */
-/*   Updated: 2022/04/12 16:03:10 by kokim            ###   ########.fr       */
+/*   Updated: 2022/04/14 15:28:02 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,21 @@
 
 typedef struct s_request
 {
-	struct sigaction	sa_bit_to_msg;
+	struct sigaction	sa_ser_check_pre;
+	struct sigaction	sa_ser_get_char;
+	struct sigaction	sa_ser_bit_to_msg;
 	pid_t				received_pid;
 	int					index;
 	int					bit;
+	int					flag;
 }	t_request;
 
-/* 서버 pid 출력 */
-void	print_server_pid(void);
 /* 전역 변수 내 시그널 핸들러, 시그널 집합 등 설정 */
 void	server_sa_initialize(struct sigaction *sa, \
 		void (*f)(int, siginfo_t *, void *));
+void	ser_check_connection_pre(void);
+void	ser_ready_to_get_char(void);
+void	ser_print_msg(void);
+
 
 #endif
