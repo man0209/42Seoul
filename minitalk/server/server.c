@@ -30,32 +30,35 @@ void ten_to_two_j(int n)
 	}
 }
 
+void print_server_pid(void)
+{
+	printf("server PID is : [ %d ] \n", getpid());
+	return;
+}
+
 void	bit_to_msg(int signu, siginfo_t *info, void *data)
 {
 	(void)data;
 	(void)signu;
 
-	static int	index;
-	static int	bit;
 	g_server.received_pid = info->si_pid;
 	//printf("g_request.client_pid : %d\n", g_server.received_pid); //ft_ 로 수정
+	if ()
 	//kill(g_server.received_pid, SIGUSR1);
-		//printf("g_server.bit = %d\n", g_server.bit);
-		//printf("g_server.index = %d\n", g_server.index);
 	if (signu == SIGUSR1)
 	{
-		bit += 1 << (7 - index);
+		g_server.bit += 1 << (7 - g_server.index);
 	}
-	index++;
+	g_server.index++;
 
-	if (index == 8)
+	if (g_server.index == 8)
 	{
-		ten_to_two_j(bit);
-		printf("\n");
-		write(1, &bit, 1);
-		printf("  ");
-		index = 0;
-		bit = 0;
+		//ten_to_two_j(g_server.bit);
+		//printf("\n ");
+		write(1, &g_server.bit, 1);
+		//printf("  ");
+		g_server.index = 0;
+		g_server.bit = 0;
 	}	
 }
 

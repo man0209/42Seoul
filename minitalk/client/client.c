@@ -35,7 +35,7 @@ void	send_msg_to_server(pid_t pid, char *str)
 			}
 			
 			printf("%d", sig);		
-			usleep(100);
+			usleep(1000);
 		}
 		printf("      ");
 		index++;

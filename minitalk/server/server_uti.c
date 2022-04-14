@@ -13,12 +13,6 @@
 #include "server.h"
 #include <stdio.h>
 
-t_request g_request;
 
-void	print_server_pid(void)
-{
-	printf("server PID is : [ %d ] \n", getpid());
-	return ;
-}
 
 

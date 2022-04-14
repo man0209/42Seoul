@@ -23,6 +23,8 @@ typedef struct s_request
 {
 	struct sigaction	sa_bit_to_msg;
 	pid_t				received_pid;
+	int					index;
+	int					bit;
 }	t_request;
 
 /* 서버 pid 출력 */
