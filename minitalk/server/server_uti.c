@@ -16,26 +16,22 @@ t_request g_server;
 
 void	ser_check_connection_pre(void)
 {
-	sigaction(SIGUSR1, &g_server.sa_ser_check_pre, NULL);
-	sigaction(SIGUSR2, &g_server.sa_ser_check_pre, NULL);
-	pause();
-}
-
-void	ser_ready_to_get_char(void)
-{
-	sigaction(SIGUSR1, &g_server.sa_ser_get_char, NULL);
-	sigaction(SIGUSR2, &g_server.sa_ser_get_char, NULL);
+	sigaction(SIGUSR1, &g_server.ser_check_connection, NULL);
+	sigaction(SIGUSR2, &g_server.ser_check_connection, NULL);
 	pause();
 }
 
 void	ser_print_msg(void)
 {
-	sigaction(SIGUSR1, &g_server.sa_ser_bit_to_msg, NULL);
-	sigaction(SIGUSR2, &g_server.sa_ser_bit_to_msg, NULL);
+	sigaction(SIGUSR1, &g_server.ser_bit_to_msg, NULL);
+	sigaction(SIGUSR2, &g_server.ser_bit_to_msg, NULL);
 	while (1)
 	{
 		pause();
 		if (g_server.flag == 1)
+		{
+			g_server.flag = 0;
 			break;
+		}
 	}
 }

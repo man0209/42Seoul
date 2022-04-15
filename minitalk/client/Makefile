@@ -17,7 +17,7 @@ CFLAGS	= -Wall -Wextra -Werror
 
 RM	= rm -rf
 
-CLIENT_SRC = client.c
+CLIENT_SRC = client.c client_uti.c
 
 CLIENT_OBJ = $(CLIENT_SRC:.c=.o)
 

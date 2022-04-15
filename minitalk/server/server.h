@@ -16,14 +16,15 @@
 # include <unistd.h>
 # include <signal.h>
 # include <stdlib.h>
+# include <stdio.h> // delete
 # include "../library/libft/libft.h"
 # include "../library/printf/ft_printf.h"
 
 typedef struct s_request
 {
-	struct sigaction	sa_ser_check_pre;
-	struct sigaction	sa_ser_get_char;
-	struct sigaction	sa_ser_bit_to_msg;
+	struct sigaction	ser_check_connection;
+	struct sigaction	ser_get_char;
+	struct sigaction	ser_bit_to_msg;
 	pid_t				received_pid;
 	int					index;
 	int					bit;
