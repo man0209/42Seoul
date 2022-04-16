@@ -12,7 +12,7 @@
 
 #include "server.h"
 
-t_request g_server;
+t_server	g_server;
 
 void	ser_check_connection_pre(void)
 {

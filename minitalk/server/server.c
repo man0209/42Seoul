@@ -11,10 +11,8 @@
 /* ************************************************************************** */
 
 #include "server.h"
-#include <stdio.h>
-#include <stdlib.h>
 
-t_request	g_server;
+t_server	g_server;
 
 void	ser_sighandler_connection(int signu, siginfo_t *info, void *data)
 {
@@ -22,12 +20,12 @@ void	ser_sighandler_connection(int signu, siginfo_t *info, void *data)
 	if (signu == SIGUSR1)
 	{
 		g_server.received_pid = info->si_pid;
-		printf("Connected Client's pid : %d\n", g_server.received_pid);
+		ft_printf("Connected Client's pid : %d\n", g_server.received_pid);
 		kill(g_server.received_pid, SIGUSR1);
 	}
 	else
 	{
-		printf("Send SIGUSR2\n");
+		ft_printf("Send SIGUSR2\n");
 		kill(g_server.received_pid, SIGUSR2);
 	}
 }
@@ -50,9 +48,10 @@ void	ser_sighandler_msg(int signu, siginfo_t *info, void *data)
 		write(1, &g_server.bit, 1);
 	}
 	if (g_server.bit == 0 && g_server.index == 7)
+	{
 		g_server.flag = 1;
-	g_server.index++;
-	
+	}
+	g_server.index++;	
 	if (g_server.index == 8)
 	{
 		g_server.index = 0;
@@ -61,7 +60,7 @@ void	ser_sighandler_msg(int signu, siginfo_t *info, void *data)
 	usleep(500);
 }
 
-void server_sa_initialize(struct sigaction *sa, \
+void	server_sa_initialize(struct sigaction *sa, \
 void (*f)(int, siginfo_t *, void *))
 {
 	sa->sa_sigaction = f;
@@ -73,7 +72,7 @@ void (*f)(int, siginfo_t *, void *))
 
 int	main(void)
 {
-	printf("server PID is : [ %d ] \n", getpid());
+	ft_printf("server PID is : [ %d ] \n", getpid());
 	server_sa_initialize(&g_server.ser_check_connection, &ser_sighandler_connection);
 	server_sa_initialize(&g_server.ser_bit_to_msg, &ser_sighandler_msg);
 	while (1)
@@ -82,4 +81,4 @@ int	main(void)
 		ser_print_msg();
 	}
 	return (0);
-}	
+}
