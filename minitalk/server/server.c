@@ -6,7 +6,7 @@
 /*   By: kokim <kokim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 13:08:48 by kokim             #+#    #+#             */
-/*   Updated: 2022/04/14 15:48:51 by kokim            ###   ########.fr       */
+/*   Updated: 2022/04/16 11:48:08 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_server	g_server;
 
-void	ser_sighandler_connection(int signu, siginfo_t *info, void *data)
+void	ser_sighandler_connec(int signu, siginfo_t *info, void *data)
 {
 	(void)data;
 	if (signu == SIGUSR1)
@@ -33,34 +33,26 @@ void	ser_sighandler_connection(int signu, siginfo_t *info, void *data)
 void	ser_sighandler_msg(int signu, siginfo_t *info, void *data)
 {
 	(void)data;
-
 	if (g_server.received_pid != info->si_pid)
 	{
 		kill(info->si_pid, SIGUSR2);
 		return ;
 	}
 	if (signu == SIGUSR1)
-	{
 		g_server.bit += 1 << (7 - g_server.index);
-	}
 	if (g_server.index == 7)
-	{
 		write(1, &g_server.bit, 1);
-	}
 	if (g_server.bit == 0 && g_server.index == 7)
-	{
 		g_server.flag = 1;
-	}
-	g_server.index++;	
+	g_server.index++;
 	if (g_server.index == 8)
 	{
 		g_server.index = 0;
 		g_server.bit = 0;
 	}
-	usleep(500);
 }
 
-void	server_sa_initialize(struct sigaction *sa, \
+void	ser_sa_initialize(struct sigaction *sa, \
 void (*f)(int, siginfo_t *, void *))
 {
 	sa->sa_sigaction = f;
@@ -73,8 +65,8 @@ void (*f)(int, siginfo_t *, void *))
 int	main(void)
 {
 	ft_printf("server PID is : [ %d ] \n", getpid());
-	server_sa_initialize(&g_server.ser_check_connection, &ser_sighandler_connection);
-	server_sa_initialize(&g_server.ser_bit_to_msg, &ser_sighandler_msg);
+	ser_sa_initialize(&g_server.ser_check_connec, &ser_sighandler_connec);
+	ser_sa_initialize(&g_server.ser_bit_to_msg, &ser_sighandler_msg);
 	while (1)
 	{
 		ser_check_connection_pre();

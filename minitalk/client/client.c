@@ -6,7 +6,7 @@
 /*   By: kokim <kokim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 13:08:38 by kokim             #+#    #+#             */
-/*   Updated: 2022/04/14 16:17:04 by kokim            ###   ########.fr       */
+/*   Updated: 2022/04/16 11:43:04 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void (*f)(int, siginfo_t *, void *))
 	sigaddset(&sa->sa_mask, SIGUSR2);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	pid_t	pid;
 
@@ -49,7 +49,7 @@ int main(int ac, char **av)
 		exit(1);
 	}
 	pid = atoi(av[1]);
-	if ( pid < 100 || pid > 99998)
+	if (pid < 100 || pid > 99998)
 	{
 		ft_printf("error2\n");
 		exit(1);

@@ -6,7 +6,7 @@
 /*   By: kokim <kokim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 13:17:59 by kokim             #+#    #+#             */
-/*   Updated: 2022/04/14 15:28:54 by kokim            ###   ########.fr       */
+/*   Updated: 2022/04/16 11:37:24 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ t_server	g_server;
 
 void	ser_check_connection_pre(void)
 {
-	sigaction(SIGUSR1, &g_server.ser_check_connection, NULL);
-	sigaction(SIGUSR2, &g_server.ser_check_connection, NULL);
+	sigaction(SIGUSR1, &g_server.ser_check_connec, NULL);
+	sigaction(SIGUSR2, &g_server.ser_check_connec, NULL);
 	pause();
 }
 
@@ -31,7 +31,7 @@ void	ser_print_msg(void)
 		if (g_server.flag == 1)
 		{
 			g_server.flag = 0;
-			break;
+			break ;
 		}
 	}
 }
