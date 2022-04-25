@@ -6,13 +6,13 @@
 #    By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/04 13:11:14 by kokim             #+#    #+#              #
-#    Updated: 2022/04/21 20:56:21 by kokim            ###   ########.fr        #
+#    Updated: 2022/04/25 12:28:31 by kokim            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = minitalk 
+NAME = push_swap 
 
-SERDIR = ./server/
+PUSH_SWAP_DIR = ./push_swap/
 
 LFDIR = ./library/libft/
 
@@ -21,29 +21,25 @@ PFDIR = ./library/printf/
 all :
 	@$(MAKE) -C $(LFDIR)
 	@$(MAKE) -C $(PFDIR)
-	@$(MAKE) -C $(CLIDIR)
-	@$(MAKE) -C $(SERDIR)
+	@$(MAKE) -C $(PUSH_SWAP_DIR)
 	@echo " $(NAME) was compiled!!"
 
 bonus :
 	@$(MAKE) -C $(LFDIR) bonus
 	@$(MAKE) -C $(PFDIR) bonus
-	@$(MAKE) -C $(CLIDIR) bonus
-	@$(MAKE) -C $(SERDIR) bonus
+	@$(MAKE) -C $(PUSH_SWAP_DIR) bonus
 	@echo " $(NAME) bonus was compiled!!"
 
 clean :
 	@$(MAKE) -C $(LFDIR) clean
 	@$(MAKE) -C $(PFDIR) clean
-	@$(MAKE) -C $(CLIDIR) clean
-	@$(MAKE) -C $(SERDIR) clean
+	@$(MAKE) -C $(PUSH_SWAP_DIR) clean
 	@echo " $(NAME)'s object files was deleted!!"
 
 fclean : 
 	@$(MAKE) -C $(LFDIR) fclean
 	@$(MAKE) -C $(PFDIR) fclean
-	@$(MAKE) -C $(CLIDIR) fclean
-	@$(MAKE) -C $(SERDIR) fclean
+	@$(MAKE) -C $(PUSH_SWAP_DIR) fclean
 	@echo " $(NAME) was deleted!!"
 
 re : fclean all

@@ -6,7 +6,7 @@
 /*   By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 20:39:56 by kokim             #+#    #+#             */
-/*   Updated: 2022/04/25 01:12:43 by kokim            ###   ########.fr       */
+/*   Updated: 2022/04/25 14:42:24 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	init_stack(t_stack *stack)
 	stack->size = 0;
 	stack->top = tail;
 }
+/*
 int	main(int ac, char **av)
 {
 	t_stack	*stack_a;
@@ -58,5 +59,5 @@ int	main(int ac, char **av)
 		exit (1);
 	init_stack(stack_a);
 	init_stack(stack_b);
-	check_argv(ac, av, stack_a);	
-}
+//	check_argv(ac, av, stack_a);	
+}*/

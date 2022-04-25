@@ -6,7 +6,7 @@
 /*   By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 20:57:06 by kokim             #+#    #+#             */
-/*   Updated: 2022/04/24 22:36:12 by kokim            ###   ########.fr       */
+/*   Updated: 2022/04/25 13:14:54 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,8 @@ typedef struct s_stack
 	int		size;
 	t_node	*top;
 } t_stack;
+
+void	init_stack(t_stack *stack);
+
 
 #endif

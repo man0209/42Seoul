@@ -6,20 +6,20 @@
 #    By: kokim <kokim@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/04 13:11:14 by kokim             #+#    #+#              #
-#    Updated: 2022/04/12 13:19:38 by kokim            ###   ########.fr        #
+#    Updated: 2022/04/25 12:30:07 by kokim            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = server 
+NAME = push_swap 
 
 CC	= gcc
 CFLAGS	= -Wall -Wextra -Werror 
 
 RM	= rm -rf
 
-SERVER_SRC = server.c server_uti.c
+SRC = push_swap.c check_argv.c
 
-SERVER_OBJ = $(SERVER_SRC:.c=.o)
+OBJ = $(SRC:.c=.o)
 
 LIBFT = ../library/libft/ 
 LFLNK = -L $(LIBFT) -lft
@@ -29,14 +29,14 @@ FTLNK = -L $(FT) -lftprintf
 
 all : $(NAME)
 
-$(NAME) : $(SERVER_OBJ)
+$(NAME) : $(OBJ)
 	@$(CC) $(CFLAGS) $(LFLNK) $(FTLNK) $^ -o $@
 
 %.o : %.c
 	@$(CC) $(CFLAGS) $< -c -o $@
 
 clean :
-	@$(RM) $(SERVER_OBJ)
+	@$(RM) $(OBJ)
 
 fclean : clean
 	@$(RM) $(NAME)
