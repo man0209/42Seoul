@@ -6,7 +6,7 @@
 /*   By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 20:39:56 by kokim             #+#    #+#             */
-/*   Updated: 2022/04/25 14:42:24 by kokim            ###   ########.fr       */
+/*   Updated: 2022/04/29 01:13:52 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 
 /*
-1. Makefile 손보기
 2. 스택 a, b 링크드 리스트로 구현.
 3. 과제에서 요구한 11가지 링크드 리스트로 출력까지 구현.
 4. 아직 모름
@@ -43,7 +42,7 @@ void	init_stack(t_stack *stack)
 	stack->size = 0;
 	stack->top = tail;
 }
-/*
+
 int	main(int ac, char **av)
 {
 	t_stack	*stack_a;
@@ -59,5 +58,13 @@ int	main(int ac, char **av)
 		exit (1);
 	init_stack(stack_a);
 	init_stack(stack_b);
-//	check_argv(ac, av, stack_a);	
-}*/
+	check_argv(ac, av, stack_a);
+	t_node *cur = stack_a->head;
+	while (cur)
+	{
+		printf("%d\n", cur->data);
+		cur = cur->next;
+	}
+	remove_all(stack_b->head);
+	free_stack(stack_b);
+}
