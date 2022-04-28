@@ -21,16 +21,13 @@ SRC = push_swap.c check_argv.c
 
 OBJ = $(SRC:.c=.o)
 
-LIBFT = ../library/libft/ 
-LFLNK = -L $(LIBFT) -lft
-
 FT = ../library/printf/
 FTLNK = -L $(FT) -lftprintf
 
 all : $(NAME)
 
 $(NAME) : $(OBJ)
-	@$(CC) $(CFLAGS) $(LFLNK) $(FTLNK) $^ -o $@
+	@$(CC) $(CFLAGS) $(FTLNK) $^ -o $@
 
 %.o : %.c
 	@$(CC) $(CFLAGS) $< -c -o $@
