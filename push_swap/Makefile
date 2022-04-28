@@ -14,30 +14,24 @@ NAME = push_swap
 
 PUSH_SWAP_DIR = ./push_swap/
 
-LFDIR = ./library/libft/
-
 PFDIR = ./library/printf/
 
 all :
-	@$(MAKE) -C $(LFDIR)
 	@$(MAKE) -C $(PFDIR)
 	@$(MAKE) -C $(PUSH_SWAP_DIR)
 	@echo " $(NAME) was compiled!!"
 
 bonus :
-	@$(MAKE) -C $(LFDIR) bonus
 	@$(MAKE) -C $(PFDIR) bonus
 	@$(MAKE) -C $(PUSH_SWAP_DIR) bonus
 	@echo " $(NAME) bonus was compiled!!"
 
 clean :
-	@$(MAKE) -C $(LFDIR) clean
 	@$(MAKE) -C $(PFDIR) clean
 	@$(MAKE) -C $(PUSH_SWAP_DIR) clean
 	@echo " $(NAME)'s object files was deleted!!"
 
 fclean : 
-	@$(MAKE) -C $(LFDIR) fclean
 	@$(MAKE) -C $(PFDIR) fclean
 	@$(MAKE) -C $(PUSH_SWAP_DIR) fclean
 	@echo " $(NAME) was deleted!!"
