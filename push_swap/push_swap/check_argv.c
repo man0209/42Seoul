@@ -6,12 +6,11 @@
 /*   By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 22:52:06 by kokim             #+#    #+#             */
-/*   Updated: 2022/04/29 01:12:17 by kokim            ###   ########.fr       */
+/*   Updated: 2022/05/03 22:42:58 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
 
 void	push(t_stack *stack, int num)
 {
@@ -32,99 +31,65 @@ void	push(t_stack *stack, int num)
 
 void	pop(t_stack *stack, t_node *remove)
 {
-	if (stack == NULL)
-		return ;
 	remove->prev->next = remove->next;
 	remove->next->prev = remove->prev;
 	
-	free(remove);
+	stack->top = stack->head->next;
+	free_node(remove);
 }
 
-static int is_space(char c)
+static int	check_sorted(t_stack *a)
 {
-	if (c == '\n' || c == '\t' || c == '\v' \
-	|| c == '\f' || c == '\r' || c == ' ')
-		return (1);
+	t_node *tmp;
+	
+	tmp = a->top;
+	if (tmp->next == a->tail)
+	{
+		return (0);
+	}
+	while (tmp != a->tail->prev)
+	{
+		if (tmp->data >= tmp->next->data)
+			return (0);
+		tmp = tmp->next;
+	}
+	return (1);
+}
+
+static int	check_duplicated(t_stack *a)
+{
+	t_node	*tmp;
+
+	tmp = a->top;
+	if (tmp->next == a->tail)
+	{
+		return (0);
+	}
+	while (tmp != a->tail->prev)
+	{
+		if (tmp->data == a->tail->prev->data)
+		{
+			return (1);
+		}
+		tmp = tmp->next;
+	}
 	return (0);
 }
 
-static int ft_atoi(char *str)
-{
-	int			minus;
-	long long	result;
-
-	minus = 1;
-	result = 0;
-	while (is_space(*str))
-		str++;
-	if (*str == '+' || *str == '-')
-	{
-		if (*str++ == '-')
-			minus *= -1;
-		if (*str == '+' || '-')
-			return (0);
-	}
-	while (*str >= '0' && *str <= '9')
-	{
-		result = (result * 10) + (*str - '0');
-		str++;
-		if (result < INT_MIN || result > INT_MAX)
-			return (0);
-	}
-	if (*str)
-		return (0);
-	return ((int)(result * minus));
-}
-
-void	check_argv(int ac, char **av, t_stack *a)
-{
-	// 중복된 숫자있으면 "Error\n" -> stack_a 에 넣고  따로 함수 만들어서
-	// 정렬된 숫자 들어오면 exit(1);
-	// "  " 들어와도 정렬되게
+void	check_argv(int ac, char **av, t_stack *a, t_stack *b)
+{	
 	int	index_av;
-	int	num;
 
-	index_av = 0;
-	while (++index_av < ac)
+	index_av = ac;
+	while (--index_av)
+		check_str(av[index_av], a, b);
+	if (check_sorted(a))
 	{
-		num = ft_atoi(av[index_av]);
-		if (num)
-		{
-			push(a, num);
-		}
-		else
-		{
-			printf("Error\n");
-			remove_all(a->head);
-			free_stack(a);
-			return ;
-		}
+		exit_on_error(a, b);
+	}
+	if (check_duplicated(a))
+	{
+		printf("2Error\n");
+		exit_on_error(a, b);
 	}
 }
-/*
-int main()
-{
-	t_stack *a;
-
-	a = (t_stack *)malloc(sizeof(t_stack));
-	init_stack(a);
-
-	push(a, 3);
-
-	push(a, 4);
-
-	push(a, 5);
-
-	t_node *cur = a->head;
-
-	while (cur)
-	{
-		printf("%d\n", cur->data);
-		printf("cur->prev : %p\n", cur->prev);
-		printf("cur : %p\n", cur);
-		printf("cur->next : %p\n", cur->next);
-
-		cur = cur->next;
-	}
-}
-*/

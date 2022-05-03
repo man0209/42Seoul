@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kokim <kokim@student.42.fr>                +#+  +:+       +#+         #
+#    By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/04 13:11:14 by kokim             #+#    #+#              #
-#    Updated: 2022/04/25 12:30:07 by kokim            ###   ########.fr        #
+#    Updated: 2022/05/03 22:16:23 by kokim            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CFLAGS	= -Wall -Wextra -Werror
 
 RM	= rm -rf
 
-SRC = push_swap.c check_argv.c
+SRC = push_swap.c check_argv.c free_utils.c ft_split.c check_str.c commands.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -27,7 +27,7 @@ FTLNK = -L $(FT) -lftprintf
 all : $(NAME)
 
 $(NAME) : $(OBJ)
-	@$(CC) $(CFLAGS) $(FTLNK) $^ -o $@
+	@$(CC) $(CFLAGS) $^ -o $@
 
 %.o : %.c
 	@$(CC) $(CFLAGS) $< -c -o $@

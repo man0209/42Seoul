@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_uti.c                                    :+:      :+:    :+:   */
+/*   free_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 16:25:53 by kokim             #+#    #+#             */
-/*   Updated: 2022/04/29 01:02:08 by kokim            ###   ########.fr       */
+/*   Updated: 2022/05/03 22:42:24 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,49 @@
 void	free_node(t_node *node)
 {
 	free(node);
-	node == NULL;
+	node = NULL;
 }
 
 void	free_stack(t_stack *stack)
 {
 	free(stack);
-	stack == NULL;
+	stack = NULL;
 }
 
-void	remove_all(t_node *head)
-{
-	t_node	*tmp;
+void	remove_all(t_stack *stack)
+{	
+	t_node	*cur;
+	t_node	*next;
 
-	tmp = head;
-	while (head)
+	cur = stack->head->next;
+	while (cur != stack->tail)
 	{
-		free_node(head);
-		tmp = tmp->next;
-		head = tmp;
+		next = cur->next;
+		free_node(cur);
+		cur = next;
 	}
+	free_node(stack->head);
+	free_node(stack->tail);
+	free_stack(stack);
+}
+
+void	exit_on_error(t_stack *a, t_stack *b)
+{
+	remove_all(a);
+	remove_all(b);
+	exit (1);
+}
+
+void	show(t_stack *stack)
+{
+	t_node *cur;
+	
+	printf("-----------------------\n");
+	cur = stack->head->next;
+	while (cur->next)
+	{
+		printf("%d\n", cur->data);
+		cur = cur->next;
+	}
+	printf("-----------------------\n");
 }
