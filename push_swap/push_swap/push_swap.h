@@ -6,7 +6,7 @@
 /*   By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 20:57:06 by kokim             #+#    #+#             */
-/*   Updated: 2022/05/03 22:16:08 by kokim            ###   ########.fr       */
+/*   Updated: 2022/05/05 23:33:05 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 typedef struct s_node
 {
 	int				data;
+	int				index;
 	struct s_node	*prev;
 	struct s_node	*next;
 } t_node;
@@ -31,21 +32,25 @@ typedef struct s_stack
 	t_node	*head;
 	t_node	*tail;
 	int		length;
-	int		size;
+	int		tmp_index;
 	t_node	*top;
 } t_stack;
 
+char	**ft_split(char const *s, char c);
+int		check_sorted(t_stack *a);
 void	check_argv(int ac, char **av, t_stack *a, t_stack *b);
 void	push(t_stack *stack, int num);
-void	pop(t_stack *stack, t_node *remove);
+void	pop(t_stack *stack);
 void	remove_all(t_stack *stack);
 void	free_stack(t_stack *stack);
 void	free_node(t_node *node);
 void	check_str(char *str, t_stack *a, t_stack *b);
 void	exit_on_error(t_stack *a, t_stack *b);
 void	show(t_stack *stack);
-char	**ft_split(char const *s, char c);
 void	swap_stack(t_stack *stack, char type);
 void	push_stack(t_stack *in, t_stack *out, char type);
+void	rotate_stack(t_stack *stack, char type);
+void	reverse_rotate_stack(t_stack *stack, char type);
+void	sort_upto_five(t_stack *a);
 
 #endif

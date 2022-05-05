@@ -6,7 +6,7 @@
 /*   By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 16:25:53 by kokim             #+#    #+#             */
-/*   Updated: 2022/05/03 22:42:24 by kokim            ###   ########.fr       */
+/*   Updated: 2022/05/05 23:29:04 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	show(t_stack *stack)
 	while (cur->next)
 	{
 		printf("%d\n", cur->data);
+		printf("index : %d\n", cur->index);
 		cur = cur->next;
 	}
 	printf("-----------------------\n");

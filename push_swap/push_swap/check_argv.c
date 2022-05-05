@@ -6,7 +6,7 @@
 /*   By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 22:52:06 by kokim             #+#    #+#             */
-/*   Updated: 2022/05/03 22:42:58 by kokim            ###   ########.fr       */
+/*   Updated: 2022/05/05 23:51:52 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	push(t_stack *stack, int num)
 	if (new_node == NULL)
 		return ;	
 	new_node->data = num;
+	new_node->index = --stack->tmp_index;
 	new_node->prev = stack->top->prev;
 	new_node->next = stack->top;
 	stack->top->prev->next = new_node;
@@ -29,16 +30,20 @@ void	push(t_stack *stack, int num)
 	// 첫번째 인자는 스택의 탑이 된다.
 }
 
-void	pop(t_stack *stack, t_node *remove)
+void	pop(t_stack *stack)
 {
-	remove->prev->next = remove->next;
-	remove->next->prev = remove->prev;
+	t_node	*top;
+
+	top = stack->top;
+	stack->head->next = top->next;
+	top->next->prev = stack->head;
 	
-	stack->top = stack->head->next;
-	free_node(remove);
+	stack->top = stack->head->next;;
+	free_node(top);
+	stack->length--;
 }
 
-static int	check_sorted(t_stack *a)
+int	check_sorted(t_stack *a)
 {
 	t_node *tmp;
 	
@@ -75,12 +80,12 @@ static int	check_duplicated(t_stack *a)
 	}
 	return (0);
 }
-
 void	check_argv(int ac, char **av, t_stack *a, t_stack *b)
 {	
 	int	index_av;
 
 	index_av = ac;
+	a->tmp_index = ac - 1;
 	while (--index_av)
 		check_str(av[index_av], a, b);
 	if (check_sorted(a))

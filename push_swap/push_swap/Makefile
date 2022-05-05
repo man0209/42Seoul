@@ -6,7 +6,7 @@
 #    By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/04 13:11:14 by kokim             #+#    #+#              #
-#    Updated: 2022/05/03 22:16:23 by kokim            ###   ########.fr        #
+#    Updated: 2022/05/05 21:46:31 by kokim            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ CFLAGS	= -Wall -Wextra -Werror
 
 RM	= rm -rf
 
-SRC = push_swap.c check_argv.c free_utils.c ft_split.c check_str.c commands.c
+SRC = push_swap.c check_argv.c free_utils.c ft_split.c check_str.c commands.c \
+	  sort_upto_five.c 
 
 OBJ = $(SRC:.c=.o)
 
