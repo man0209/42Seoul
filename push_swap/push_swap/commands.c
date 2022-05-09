@@ -6,7 +6,7 @@
 /*   By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 20:55:24 by kokim             #+#    #+#             */
-/*   Updated: 2022/05/03 23:50:15 by kokim            ###   ########.fr       */
+/*   Updated: 2022/05/05 23:59:15 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	push_stack(t_stack *in, t_stack *out, char type)
 	if (type < 'A' || type > 'B')
 		return ;
 	data = out->top->data;
-	pop(out, out->top);
+	pop(out);
 	push(in, data);
 	if (type == 'A')
 		printf("pa\n");

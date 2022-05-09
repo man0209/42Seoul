@@ -6,7 +6,7 @@
 /*   By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 22:02:51 by kokim             #+#    #+#             */
-/*   Updated: 2022/05/05 22:37:03 by kokim            ###   ########.fr       */
+/*   Updated: 2022/05/06 00:03:08 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,22 @@
 int	get_max(t_stack *stack)
 {
 	int		max;
+	int		index;
 	t_node	*top;
 
 	max = 0;
+	index = 0;
 	top = stack->top;
-	while (top->next != stack->tail)
+	while (top != stack->tail)
 	{
 		if (top->data > max)
+		{
 			max = top->data;
+			index = top->index;
+		}
 		top = top->next;
 	}
-	return (max);
+	return (index);
 }
 
 int	get_min(t_stack *stack)

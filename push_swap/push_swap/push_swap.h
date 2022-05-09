@@ -6,7 +6,7 @@
 /*   By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 20:57:06 by kokim             #+#    #+#             */
-/*   Updated: 2022/05/05 23:33:05 by kokim            ###   ########.fr       */
+/*   Updated: 2022/05/05 23:58:35 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_stack
 
 char	**ft_split(char const *s, char c);
 int		check_sorted(t_stack *a);
+int		get_max(t_stack *stack);
 void	check_argv(int ac, char **av, t_stack *a, t_stack *b);
 void	push(t_stack *stack, int num);
 void	pop(t_stack *stack);

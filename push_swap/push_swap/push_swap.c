@@ -6,7 +6,7 @@
 /*   By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 20:39:56 by kokim             #+#    #+#             */
-/*   Updated: 2022/05/05 23:51:21 by kokim            ###   ########.fr       */
+/*   Updated: 2022/05/06 00:02:02 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int	main(int ac, char **av)
 	// 	sort_upto_five(stack_a);
 	 show(stack_a);
 	 printf("stack_a->length : %d\n", stack_a->length);
+	 printf("Max : %d\n", get_max(stack_a));
 	// show(stack_b);
 	
 	remove_all(stack_a);
