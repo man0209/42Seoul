@@ -67,14 +67,12 @@ static void	split_str(char *str, t_stack *a)
 	split = ft_split(str, ' ');
 	i = 0;
 	while (split[i] != NULL)
-	{
 		i++;
-	}
 	while (i--)
 	{
 		num = 0;
 		ft_atoi(split[i], &num);
-		push(a, num);
+		push(a, num, 0, 0);
 		free(split[i]);
 	}
 	free(split);
@@ -91,7 +89,7 @@ void	check_str(char *str, t_stack *a, t_stack *b)
 		return ;
 	}
 	if (ft_atoi(str, &num))
-		push(a, num);
+		push(a, num, 0, 0);
 	else
 	{
 		printf("3Error\n");

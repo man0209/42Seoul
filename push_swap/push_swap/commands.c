@@ -6,7 +6,7 @@
 /*   By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 20:55:24 by kokim             #+#    #+#             */
-/*   Updated: 2022/05/05 23:59:15 by kokim            ###   ########.fr       */
+/*   Updated: 2022/05/11 22:37:03 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	swap_stack(t_stack *stack, char type)
 {
 	int		tmp_data;
+	int		tmp_index;
 	t_node	*tmp;
 	
 	if (stack == NULL)
@@ -25,8 +26,11 @@ void	swap_stack(t_stack *stack, char type)
 	if (tmp->next == stack->tail)
 		return ;
 	tmp_data = stack->top->data;
+	tmp_index = stack->top->index;
 	stack->top->data = stack->top->next->data;
+	stack->top->index = stack->top->next->index;
 	stack->top->next->data = tmp_data;
+	stack->top->next->index = tmp_index;
 	if (type == 'A')
 		printf("sa\n");
 	else if (type == 'B')
@@ -36,14 +40,16 @@ void	swap_stack(t_stack *stack, char type)
 void	push_stack(t_stack *in, t_stack *out, char type)
 {
 	int	data;
+	int	index;
 
 	if (in == NULL || out == NULL)
 		return ;
 	if (type < 'A' || type > 'B')
 		return ;
 	data = out->top->data;
+	index = out->top->index;
+	push(in, data, 1, index);
 	pop(out);
-	push(in, data);
 	if (type == 'A')
 		printf("pa\n");
 	else if (type == 'B')

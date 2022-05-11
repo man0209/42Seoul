@@ -6,7 +6,7 @@
 /*   By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 20:39:56 by kokim             #+#    #+#             */
-/*   Updated: 2022/05/06 00:02:02 by kokim            ###   ########.fr       */
+/*   Updated: 2022/05/11 22:41:31 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,20 +47,20 @@ int	main(int ac, char **av)
 	stack_b = (t_stack *)malloc(sizeof(t_stack));
 	if (stack_b == NULL)
 		return (0);
-	 init_stack(stack_a);
-	 init_stack(stack_b);
-	 check_argv(ac, av, stack_a, stack_b);
-	 show(stack_a);
-	//  if (stack_a->length >5)
-	// 	sort_greedy(stack_a, stack_b);
-	// 	return 0;
-	// else
-	// 	sort_upto_five(stack_a);
-	 show(stack_a);
-	 printf("stack_a->length : %d\n", stack_a->length);
-	 printf("Max : %d\n", get_max(stack_a));
-	// show(stack_b);
-	
+	init_stack(stack_a);
+	init_stack(stack_b);
+	check_argv(ac, av, stack_a, stack_b);
+	show(stack_a, 'A');
+	if (stack_a->length > 5)
+		sort_a_b(stack_a, stack_b);
+	else
+		sort_upto_five(stack_a, stack_b);
+	show(stack_a, 'A');
+	show(stack_b, 'B');
+
+	printf("stack_a->length : %d\n", stack_a->length);
+	printf("Max : %d\n", get_max(stack_a));
+	printf("Min : %d\n", get_min(stack_a));
 	remove_all(stack_a);
 	remove_all(stack_b);
 	return (0);

@@ -6,21 +6,24 @@
 /*   By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 22:52:06 by kokim             #+#    #+#             */
-/*   Updated: 2022/05/05 23:51:52 by kokim            ###   ########.fr       */
+/*   Updated: 2022/05/11 22:28:40 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	push(t_stack *stack, int num)
+void	push(t_stack *stack, int num, int flag, int index)
 {
 	t_node	*new_node;
 
 	new_node = (t_node*)malloc(sizeof(t_node *));
 	if (new_node == NULL)
-		return ;	
+		return ;
 	new_node->data = num;
-	new_node->index = --stack->tmp_index;
+	if (flag == 0)
+		new_node->index = stack->tmp_index++;
+	if (flag == 1)
+		new_node->index = index;
 	new_node->prev = stack->top->prev;
 	new_node->next = stack->top;
 	stack->top->prev->next = new_node;
@@ -32,14 +35,13 @@ void	push(t_stack *stack, int num)
 
 void	pop(t_stack *stack)
 {
-	t_node	*top;
+	t_node	*tmp;
 
-	top = stack->top;
-	stack->head->next = top->next;
-	top->next->prev = stack->head;
-	
+	tmp = stack->top;
+	stack->head->next = tmp->next;
+	tmp->next->prev = stack->head;
 	stack->top = stack->head->next;;
-	free_node(top);
+	free_node(tmp);
 	stack->length--;
 }
 
@@ -85,7 +87,6 @@ void	check_argv(int ac, char **av, t_stack *a, t_stack *b)
 	int	index_av;
 
 	index_av = ac;
-	a->tmp_index = ac - 1;
 	while (--index_av)
 		check_str(av[index_av], a, b);
 	if (check_sorted(a))

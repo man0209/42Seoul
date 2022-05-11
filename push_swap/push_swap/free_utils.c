@@ -6,7 +6,7 @@
 /*   By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 16:25:53 by kokim             #+#    #+#             */
-/*   Updated: 2022/05/05 23:29:04 by kokim            ###   ########.fr       */
+/*   Updated: 2022/05/11 22:31:22 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,13 @@ void	exit_on_error(t_stack *a, t_stack *b)
 	exit (1);
 }
 
-void	show(t_stack *stack)
+void	show(t_stack *stack, char name)
 {
-	t_node *cur;
+	t_node	*cur;
+	char	a;
 	
+	a = name;
+	printf("%c%c%c%c%c%c\n", a, a, a, a, a, a);
 	printf("-----------------------\n");
 	cur = stack->head->next;
 	while (cur->next)
