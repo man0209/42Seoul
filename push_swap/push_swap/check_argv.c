@@ -6,13 +6,13 @@
 /*   By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 22:52:06 by kokim             #+#    #+#             */
-/*   Updated: 2022/05/11 22:28:40 by kokim            ###   ########.fr       */
+/*   Updated: 2022/05/17 22:32:34 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	push(t_stack *stack, int num, int flag, int index)
+void	push(t_stack *stack, int num, int index)
 {
 	t_node	*new_node;
 
@@ -20,37 +20,35 @@ void	push(t_stack *stack, int num, int flag, int index)
 	if (new_node == NULL)
 		return ;
 	new_node->data = num;
-	if (flag == 0)
-		new_node->index = stack->tmp_index++;
-	if (flag == 1)
-		new_node->index = index;
+	new_node->index = index;
 	new_node->prev = stack->top->prev;
 	new_node->next = stack->top;
 	stack->top->prev->next = new_node;
 	stack->top->prev = new_node;
 	stack->top = new_node;
 	stack->length++;
-	// 첫번째 인자는 스택의 탑이 된다.
 }
 
 void	pop(t_stack *stack)
 {
 	t_node	*tmp;
 
+	if (stack->head->next == stack->tail)
+		return ;
 	tmp = stack->top;
 	stack->head->next = tmp->next;
 	tmp->next->prev = stack->head;
-	stack->top = stack->head->next;;
+	stack->top = stack->head->next;
 	free_node(tmp);
 	stack->length--;
 }
 
 int	check_sorted(t_stack *a)
 {
-	t_node *tmp;
+	t_node	*tmp;
 	
 	tmp = a->top;
-	if (tmp->next == a->tail)
+	if (a->length < 2)
 	{
 		return (0);
 	}
@@ -65,37 +63,44 @@ int	check_sorted(t_stack *a)
 
 static int	check_duplicated(t_stack *a)
 {
+	t_node	*cur;
 	t_node	*tmp;
 
-	tmp = a->top;
-	if (tmp->next == a->tail)
+	if (a->length < 2)
 	{
 		return (0);
 	}
-	while (tmp != a->tail->prev)
+	cur = a->top;
+	while (cur != a->tail->prev)
 	{
-		if (tmp->data == a->tail->prev->data)
+		tmp = cur->next;
+		while (tmp != a->tail)
 		{
-			return (1);
+			if (cur->data == tmp->data)
+				return (1);
+			tmp = tmp->next;
 		}
-		tmp = tmp->next;
+		cur = cur->next;
 	}
 	return (0);
 }
 void	check_argv(int ac, char **av, t_stack *a, t_stack *b)
 {	
 	int	index_av;
+	int	*arr;
 
 	index_av = ac;
 	while (--index_av)
 		check_str(av[index_av], a, b);
+	arr = (int *)malloc(sizeof(int) * a->length);
+	array_converter(a, arr);
 	if (check_sorted(a))
 	{
 		exit_on_error(a, b);
 	}
 	if (check_duplicated(a))
 	{
-		printf("2Error\n");
+		ft_printf("Error\n");
 		exit_on_error(a, b);
 	}
 }

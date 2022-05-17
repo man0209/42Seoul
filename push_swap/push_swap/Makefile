@@ -6,7 +6,7 @@
 #    By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/04 13:11:14 by kokim             #+#    #+#              #
-#    Updated: 2022/05/11 22:40:29 by kokim            ###   ########.fr        #
+#    Updated: 2022/05/17 17:26:25 by kokim            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,9 @@ CFLAGS	= -Wall -Wextra -Werror
 
 RM	= rm -rf
 
-SRC = push_swap.c check_argv.c free_utils.c ft_split.c check_str.c commands.c \
-	  sort_upto_five.c  sort_utils.c sort_utils2.c
+SRC = push_swap.c check_argv.c free_utils.c ft_split.c check_str.c ss_pa.c \
+	  rr.c rra.c sort_upto_five.c  sort_utils.c sort_big.c get_max.c \
+	  array_utils.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -28,7 +29,7 @@ FTLNK = -L $(FT) -lftprintf
 all : $(NAME)
 
 $(NAME) : $(OBJ)
-	@$(CC) $(CFLAGS) $^ -o $@
+	@$(CC) $(CFLAGS) $(FTLNK) $^ -o $@
 
 %.o : %.c
 	@$(CC) $(CFLAGS) $< -c -o $@

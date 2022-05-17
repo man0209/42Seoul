@@ -6,7 +6,7 @@
 /*   By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 18:32:44 by kokim             #+#    #+#             */
-/*   Updated: 2022/05/03 20:44:39 by kokim            ###   ########.fr       */
+/*   Updated: 2022/05/17 22:32:45 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,15 @@ static int ft_atoi(char *str, int *num)
 	{
 		result = (result * 10) + (*str++ - '0');
 		if (result < INT_MIN || result > INT_MAX)
-			return (0);
+			return (1);
 	}
 	if (*str)
-		return (0);
+		return (1);
 	*num = (int)(result * minus);
-	return (1);
+	return (0);
 }
 
-static void	split_str(char *str, t_stack *a)
+static int	split_str(char *str, t_stack *a)
 {
 	char	**split;
 	int		i;
@@ -68,14 +68,18 @@ static void	split_str(char *str, t_stack *a)
 	i = 0;
 	while (split[i] != NULL)
 		i++;
+	if (i == 0)
+		return (1);
 	while (i--)
 	{
 		num = 0;
-		ft_atoi(split[i], &num);
-		push(a, num, 0, 0);
+		if (ft_atoi(split[i], &num))
+			return (1);
+		push(a, num, 0);
 		free(split[i]);
 	}
 	free(split);
+	return (0);
 }
 
 void	check_str(char *str, t_stack *a, t_stack *b)
@@ -85,14 +89,18 @@ void	check_str(char *str, t_stack *a, t_stack *b)
 	num = 0;
 	if (ft_strchr(str, ' '))
 	{
-		split_str(str, a);
+		if (split_str(str, a))
+		{
+			ft_printf("Error\n");
+			exit_on_error(a,b);
+		}
 		return ;
 	}
 	if (ft_atoi(str, &num))
-		push(a, num, 0, 0);
-	else
 	{
-		printf("3Error\n");
+		ft_printf("Error\n");
 		exit_on_error(a, b);
 	}
+	else
+		push(a, num, 0);
 }

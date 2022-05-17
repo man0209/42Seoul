@@ -6,7 +6,7 @@
 /*   By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 21:46:03 by kokim             #+#    #+#             */
-/*   Updated: 2022/05/05 23:29:55 by kokim            ###   ########.fr       */
+/*   Updated: 2022/05/17 00:56:45 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,45 +20,36 @@ static void	sort_two(t_stack *stack)
 
 	tmp = stack->top;
 	if (tmp->data > tmp->next->data)
-		swap_stack(stack, 'A');
+		sa(stack, 0);
 }
 
 static void	sort_three(t_stack *a)
 {
+	int	max_idx;
+	
 	if (check_sorted(a))
 		return ;
-	if (a->top->index == get_min(a))
-	{ 
-		reverse_rotate_stack(a, 'A');
-		swap_stack(a, 'A');
-	}
-	else if (a->top->index == get_max(a))
-	{
-		rotate_stack(a, 'A');
-		if (a->top->index != get_min(a))
-			swap_stack(a, 'A');
-	}
-	else
-	{
-		if (a->tail->prev->index == get_max(a))
-			swap_stack(a, 'A');
-		else
-			reverse_rotate_stack(a, 'A');
-	}
+	max_idx = get_max_index(a);
+	if (a->top->index == max_idx)
+		ra(a, 0);
+	else if (a->top->next->index == max_idx)
+		rra(a, 0);
+	if (a->top->index == max_idx - 1)
+		sa(a, 0);
 }
 
 static void	sort_four(t_stack *a, t_stack *b)
 {
-	move_smallest_a(a, b);
+	push_smallest_a(a, b);
 	sort_three(a);
-	push_stack(a, b, 'A');
+	pa(a, b);
 }
 
 static void	sort_five(t_stack *a, t_stack *b)
 {
-	move_smallest_a(a, b);
+	push_smallest_a(a, b);
 	sort_four(a, b);
-	push_stack(a, b, 'A');
+	pa(a, b);
 }
 
 void	sort_upto_five(t_stack *a, t_stack *b)

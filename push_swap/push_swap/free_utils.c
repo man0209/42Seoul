@@ -6,7 +6,7 @@
 /*   By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 16:25:53 by kokim             #+#    #+#             */
-/*   Updated: 2022/05/11 22:31:22 by kokim            ###   ########.fr       */
+/*   Updated: 2022/05/17 22:26:06 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,14 @@ void	show(t_stack *stack, char name)
 	char	a;
 	
 	a = name;
-	printf("%c%c%c%c%c%c\n", a, a, a, a, a, a);
-	printf("-----------------------\n");
+	ft_printf("-----------------------\n");
+	ft_printf("%c%c%c%c%c%c\n", a, a, a, a, a, a);
 	cur = stack->head->next;
-	while (cur->next)
+	while (cur != stack->tail)
 	{
-		printf("%d\n", cur->data);
-		printf("index : %d\n", cur->index);
+		ft_printf("%d\n", cur->data);
+		ft_printf("index : %d\n", cur->index);
 		cur = cur->next;
 	}
-	printf("-----------------------\n");
+	ft_printf("-----------------------\n");
 }
