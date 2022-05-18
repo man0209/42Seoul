@@ -6,13 +6,13 @@
 /*   By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 18:32:44 by kokim             #+#    #+#             */
-/*   Updated: 2022/05/17 22:32:45 by kokim            ###   ########.fr       */
+/*   Updated: 2022/05/18 10:19:45 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static char *ft_strchr(const char *s, int c)
+static char	*ft_strchr(const char *s, int c)
 {
 	while (*s)
 	{
@@ -25,17 +25,18 @@ static char *ft_strchr(const char *s, int c)
 	return (0);
 }
 
-static int is_space(char c)
+static int	is_space(char c)
 {
-	if (c == '\n' || c == '\t' || c == '\v' || c == '\f' || c == '\r' || c == ' ')
+	if (c == '\n' || c == '\t' || c == '\v' || c == '\f' || c == '\r'\
+			|| c == ' ')
 		return (1);
 	return (0);
 }
 
-static int ft_atoi(char *str, int *num)
+static int	ft_atoi(char *str, int *num)
 {
-	int minus;
-	long long result;
+	int			minus;
+	long long	result;
 
 	minus = 1;
 	result = 0;
@@ -92,7 +93,7 @@ void	check_str(char *str, t_stack *a, t_stack *b)
 		if (split_str(str, a))
 		{
 			ft_printf("Error\n");
-			exit_on_error(a,b);
+			exit_on_error(a, b);
 		}
 		return ;
 	}

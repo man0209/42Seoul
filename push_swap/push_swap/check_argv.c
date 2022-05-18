@@ -6,7 +6,7 @@
 /*   By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 22:52:06 by kokim             #+#    #+#             */
-/*   Updated: 2022/05/17 22:32:34 by kokim            ###   ########.fr       */
+/*   Updated: 2022/05/18 10:27:24 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	push(t_stack *stack, int num, int index)
 {
 	t_node	*new_node;
 
-	new_node = (t_node*)malloc(sizeof(t_node *));
+	new_node = (t_node *)malloc(sizeof(t_node *));
 	if (new_node == NULL)
 		return ;
 	new_node->data = num;
@@ -46,7 +46,7 @@ void	pop(t_stack *stack)
 int	check_sorted(t_stack *a)
 {
 	t_node	*tmp;
-	
+
 	tmp = a->top;
 	if (a->length < 2)
 	{
@@ -84,6 +84,7 @@ static int	check_duplicated(t_stack *a)
 	}
 	return (0);
 }
+
 void	check_argv(int ac, char **av, t_stack *a, t_stack *b)
 {	
 	int	index_av;

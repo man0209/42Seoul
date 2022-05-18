@@ -6,7 +6,7 @@
 /*   By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 20:57:06 by kokim             #+#    #+#             */
-/*   Updated: 2022/05/17 22:33:48 by kokim            ###   ########.fr       */
+/*   Updated: 2022/05/18 10:20:50 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,22 @@
 # define INT_MAX 2147483648
 # define INT_MIN -2147483649
 
-typedef struct	s_node
+typedef struct s_node
 {
 	int				data;
 	int				index;
 	struct s_node	*prev;
 	struct s_node	*next;
-} t_node;
+}	t_node;
 
-typedef struct	s_stack
+typedef struct s_stack
 {
 	t_node			*head;
 	t_node			*tail;
 	int				length;
 	int				chunk;
 	t_node			*top;
-} t_stack;
+}	t_stack;
 
 /* ft_split.c */
 char	**ft_split(char const *s, char c);

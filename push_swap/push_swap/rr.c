@@ -6,7 +6,7 @@
 /*   By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 22:47:12 by kokim             #+#    #+#             */
-/*   Updated: 2022/05/16 23:03:03 by kokim            ###   ########.fr       */
+/*   Updated: 2022/05/18 10:36:07 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	ra(t_stack *stack, int flag)
 {
-	t_node *tmp;
+	t_node	*tmp;
 
 	if (stack->length < 2)
-		return;
+		return ;
 	tmp = stack->top;
 	stack->head->next = tmp->next;
 	tmp->next->prev = stack->head;
@@ -32,10 +32,10 @@ void	ra(t_stack *stack, int flag)
 
 void	rb(t_stack *stack, int flag)
 {
-	t_node *tmp;
+	t_node	*tmp;
 
 	if (stack->length < 2)
-		return;
+		return ;
 	tmp = stack->top;
 	stack->head->next = tmp->next;
 	tmp->next->prev = stack->head;

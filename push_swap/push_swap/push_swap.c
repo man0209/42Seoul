@@ -6,7 +6,7 @@
 /*   By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 20:39:56 by kokim             #+#    #+#             */
-/*   Updated: 2022/05/17 22:02:52 by kokim            ###   ########.fr       */
+/*   Updated: 2022/05/18 10:28:11 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	make_chunk(t_stack *stack)
 {
 	int	length;
-	
+
 	length = stack->length;
 	if (length <= 10)
 		stack->chunk = 1;
@@ -33,7 +33,7 @@ static void	init_stack(t_stack *stack)
 {
 	t_node	*head;
 	t_node	*tail;
-	
+
 	head = (t_node *)malloc(sizeof(t_node));
 	if (head == NULL)
 		return ;

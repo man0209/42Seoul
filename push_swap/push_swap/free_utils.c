@@ -6,7 +6,7 @@
 /*   By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 16:25:53 by kokim             #+#    #+#             */
-/*   Updated: 2022/05/17 22:26:06 by kokim            ###   ########.fr       */
+/*   Updated: 2022/05/18 10:27:47 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	show(t_stack *stack, char name)
 {
 	t_node	*cur;
 	char	a;
-	
+
 	a = name;
 	ft_printf("-----------------------\n");
 	ft_printf("%c%c%c%c%c%c\n", a, a, a, a, a, a);

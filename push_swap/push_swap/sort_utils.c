@@ -6,7 +6,7 @@
 /*   By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 22:02:51 by kokim             #+#    #+#             */
-/*   Updated: 2022/05/17 22:16:12 by kokim            ###   ########.fr       */
+/*   Updated: 2022/05/18 10:22:12 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	push_smallest_a(t_stack *a, t_stack *b)
 					ra(a, 0);
 			}
 			pb(b, a);
-			return;
+			return ;
 		}
 		index++;
 		tmp = tmp->next;

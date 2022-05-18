@@ -6,7 +6,7 @@
 /*   By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 20:55:24 by kokim             #+#    #+#             */
-/*   Updated: 2022/05/17 22:30:51 by kokim            ###   ########.fr       */
+/*   Updated: 2022/05/18 10:25:48 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	sa(t_stack *stack, int flag)
 {
 	int		tmp_data;
 	int		tmp_index;
-	
+
 	if (stack->length < 2)
 		return ;
 	tmp_data = stack->top->data;
@@ -31,11 +31,11 @@ void	sa(t_stack *stack, int flag)
 
 void	sb(t_stack *stack, int flag)
 {
-	int tmp_data;
-	int tmp_index;
+	int	tmp_data;
+	int	tmp_index;
 
 	if (stack->length < 2)
-		return;
+		return ;
 	tmp_data = stack->top->data;
 	tmp_index = stack->top->index;
 	stack->top->data = stack->top->next->data;
@@ -46,7 +46,7 @@ void	sb(t_stack *stack, int flag)
 		write(1, "sb\n", 3);
 }
 
-void ss(t_stack *a, t_stack *b)
+void	ss(t_stack *a, t_stack *b)
 {
 	if (a->length < 2)
 		return ;
@@ -73,11 +73,11 @@ void	pa(t_stack *in, t_stack *out)
 
 void	pb(t_stack *in, t_stack *out)
 {
-	int data;
-	int index;
+	int	data;
+	int	index;
 
 	if (out->head->next == out->tail)
-		return;
+		return ;
 	data = out->top->data;
 	index = out->top->index;
 	push(in, data, index);

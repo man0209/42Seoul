@@ -6,7 +6,7 @@
 /*   By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 22:05:45 by kokim             #+#    #+#             */
-/*   Updated: 2022/05/17 00:53:15 by kokim            ###   ########.fr       */
+/*   Updated: 2022/05/18 10:24:10 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	get_max_index(t_stack *stack)
 {
-	int max;
-	int index;
-	t_node *top;
+	int		max;
+	int		index;
+	t_node	*top;
 
 	top = stack->top;
 	max = top->data;
@@ -35,9 +35,9 @@ int	get_max_index(t_stack *stack)
 
 int	get_min_index(t_stack *stack)
 {
-	int min;
-	int index;
-	t_node *top;
+	int		min;
+	int		index;
+	t_node	*top;
 
 	top = stack->top;
 	min = top->data;
@@ -58,7 +58,7 @@ int	get_max(t_stack *stack)
 {
 	int		max;
 	t_node	*tmp;
-	
+
 	tmp = stack->top;
 	max = 0;
 	while (tmp != stack->tail)
@@ -72,8 +72,8 @@ int	get_max(t_stack *stack)
 
 int	get_min(t_stack *stack)
 {
-	int min;
-	t_node *tmp;
+	int		min;
+	t_node	*tmp;
 
 	tmp = stack->top;
 	min = tmp->data;

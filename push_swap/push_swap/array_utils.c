@@ -6,7 +6,7 @@
 /*   By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:16:21 by kokim             #+#    #+#             */
-/*   Updated: 2022/05/16 23:44:16 by kokim            ###   ########.fr       */
+/*   Updated: 2022/05/18 10:23:02 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	array_ascending(t_stack *a, int *arr)
 	int	i;
 	int	j;
 	int	tmp;
-	
+
 	i = 0;
 	while (i < a->length)
 	{
@@ -28,7 +28,7 @@ static void	array_ascending(t_stack *a, int *arr)
 			{
 				tmp = arr[i];
 				arr[i] = arr[j];
-				arr[j] = tmp; 
+				arr[j] = tmp;
 			}
 			j++;
 		}
@@ -40,7 +40,7 @@ static void	set_a_index(t_stack *a, int *arr)
 {
 	int		i;
 	t_node	*tmp;
-	
+
 	i = 0;
 	while (i < a->length)
 	{

@@ -6,7 +6,7 @@
 /*   By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 21:46:03 by kokim             #+#    #+#             */
-/*   Updated: 2022/05/17 00:56:45 by kokim            ###   ########.fr       */
+/*   Updated: 2022/05/18 10:36:57 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static void	sort_two(t_stack *stack)
 {
-	if (check_sorted(stack))
-		return ;
 	t_node	*tmp;
 
+	if (check_sorted(stack))
+		return ;
 	tmp = stack->top;
 	if (tmp->data > tmp->next->data)
 		sa(stack, 0);
@@ -26,7 +26,7 @@ static void	sort_two(t_stack *stack)
 static void	sort_three(t_stack *a)
 {
 	int	max_idx;
-	
+
 	if (check_sorted(a))
 		return ;
 	max_idx = get_max_index(a);
