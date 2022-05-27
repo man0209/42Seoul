@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kokim <kokim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/26 11:33:10 by kokim             #+#    #+#             */
-/*   Updated: 2022/05/27 14:36:21 by kokim            ###   ########.fr       */
+/*   Created: 2021/12/06 15:46:17 by kokim             #+#    #+#             */
+/*   Updated: 2021/12/07 11:08:22 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
-
-# include <stdio.h>
-# include "../mlx/mlx.h"
-# include "../gnl/get_next_line.h"
-# define X_EVENT_KEY_PRESS 2
-# define X_EVENT_KEY_RELEASE 3
-# define X_EVENT_DESTROY 17
-# define KEY_W 13
-# define KEY_A 0
-# define KEY_S 1
-# define KEY_D 2
-# define KEY_ESC 53
-
-typedef struct s_info
+char	*ft_strrchr(const char *s, int c)
 {
-	void *mlx;
-	void *new_window;
-} t_info;
+	char	*start_point;
 
-#endif
+	start_point = (char *) s;
+	while (*s)
+		s++;
+	if (c == '\0')
+		return ((char *) s);
+	while (s > start_point)
+	{
+		s--;
+		if (*s == (char ) c)
+		{
+			return ((char *) s);
+		}
+	}
+	return (0);
+}

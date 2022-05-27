@@ -1,34 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kokim <kokim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/26 11:33:10 by kokim             #+#    #+#             */
-/*   Updated: 2022/05/27 14:36:21 by kokim            ###   ########.fr       */
+/*   Created: 2021/12/09 08:54:03 by kokim             #+#    #+#             */
+/*   Updated: 2021/12/17 20:40:55 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#include "libft.h"
 
-# include <stdio.h>
-# include "../mlx/mlx.h"
-# include "../gnl/get_next_line.h"
-# define X_EVENT_KEY_PRESS 2
-# define X_EVENT_KEY_RELEASE 3
-# define X_EVENT_DESTROY 17
-# define KEY_W 13
-# define KEY_A 0
-# define KEY_S 1
-# define KEY_D 2
-# define KEY_ESC 53
-
-typedef struct s_info
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	void *mlx;
-	void *new_window;
-} t_info;
+	char	*substr;
+	size_t	i;
 
-#endif
+	i = 0;
+	if (s == NULL)
+		return (0);
+	if (start >= ft_strlen(s))
+		return (ft_strdup(""));
+	substr = (char *)malloc(sizeof(char) * len + 1);
+	if (substr == NULL)
+		return (0);
+	while (len)
+	{
+		substr[i] = s[start + i];
+		i++;
+		len--;
+	}
+	substr[i] = '\0';
+	return (substr);
+}

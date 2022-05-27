@@ -6,7 +6,7 @@
 #    By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/04 13:11:14 by kokim             #+#    #+#              #
-#    Updated: 2022/05/26 16:10:15 by kokim            ###   ########.fr        #
+#    Updated: 2022/05/27 12:15:17 by kokim            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,14 +21,16 @@ SRC = main.c
 
 OBJ = $(SRC:.c=.o)
 
-MLX = ../mlx/
+MLX_LNK = -L ./ -lmlx
 
-MLX_LNK = -L $(MLX) -lmlx
+LIBFT_DIR = ../libft/
+
+LIBFT_LNK = -L $(LIBFT_DIR) -lft
 
 all : $(NAME)
 
 $(NAME) : $(OBJ)
-	$(CC) $(CFLAGS) $(MLX_LNK) $^ -o $@
+	$(CC) $(CFLAGS) $(MLX_LNK) $(LIBFT_LNK) $^ -o $@
 
 %.o : %.c
 	@$(CC) $(CFLAGS) $< -c -o $@ 

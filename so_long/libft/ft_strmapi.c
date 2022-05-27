@@ -1,34 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kokim <kokim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/26 11:33:10 by kokim             #+#    #+#             */
-/*   Updated: 2022/05/27 14:36:21 by kokim            ###   ########.fr       */
+/*   Created: 2021/12/13 12:48:57 by kokim             #+#    #+#             */
+/*   Updated: 2021/12/17 20:33:24 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#include "libft.h"
 
-# include <stdio.h>
-# include "../mlx/mlx.h"
-# include "../gnl/get_next_line.h"
-# define X_EVENT_KEY_PRESS 2
-# define X_EVENT_KEY_RELEASE 3
-# define X_EVENT_DESTROY 17
-# define KEY_W 13
-# define KEY_A 0
-# define KEY_S 1
-# define KEY_D 2
-# define KEY_ESC 53
-
-typedef struct s_info
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	void *mlx;
-	void *new_window;
-} t_info;
+	size_t	i;
+	size_t	len;
+	char	*tmp;
 
-#endif
+	if (s == NULL || f == NULL)
+		return (0);
+	i = 0;
+	len = ft_strlen(s);
+	tmp = (char *)malloc(sizeof(char) * len + 1);
+	if (tmp == NULL)
+		return (0);
+	while (i < len)
+	{
+		tmp[i] = (*f)(i, s[i]);
+		i++;
+	}
+	tmp[i] = '\0';
+	return (tmp);
+}

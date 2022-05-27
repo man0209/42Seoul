@@ -1,34 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kokim <kokim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/26 11:33:10 by kokim             #+#    #+#             */
-/*   Updated: 2022/05/27 14:36:21 by kokim            ###   ########.fr       */
+/*   Created: 2021/12/06 11:16:58 by kokim             #+#    #+#             */
+/*   Updated: 2021/12/06 12:48:55 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#include "libft.h"
 
-# include <stdio.h>
-# include "../mlx/mlx.h"
-# include "../gnl/get_next_line.h"
-# define X_EVENT_KEY_PRESS 2
-# define X_EVENT_KEY_RELEASE 3
-# define X_EVENT_DESTROY 17
-# define KEY_W 13
-# define KEY_A 0
-# define KEY_S 1
-# define KEY_D 2
-# define KEY_ESC 53
-
-typedef struct s_info
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	void *mlx;
-	void *new_window;
-} t_info;
+	size_t	src_len;
+	size_t	i;
 
-#endif
+	i = 0;
+	src_len = ft_strlen(src);
+	while (i < src_len && i + 1 < dstsize)
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	if (dstsize > 0)
+		dst[i] = '\0';
+	return (src_len);
+}

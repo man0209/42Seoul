@@ -6,18 +6,43 @@
 /*   By: kokim <kokim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 11:54:18 by kokim             #+#    #+#             */
-/*   Updated: 2022/05/26 11:56:30 by kokim            ###   ########.fr       */
+/*   Updated: 2022/05/27 14:47:56 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int main(void)
+void	info_init(t_info *info)
 {
-	void *mlx;
-	void *mlx_win;
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
-	mlx_loop(mlx);
+	info->mlx = mlx_init();
+	info->new_window
+}
+
+int	key_press(int keycode, t_param *param)
+{
+	if (keycode == KEY_W)
+		param->x++;
+	else if (keycode == KEY_S)
+		param->x--;
+	else if (keycode == KEY_A)
+		param->y++;
+	else if (keycode == KEY_D)
+		param->y--;
+	else if (keycode == KEY_ESC)
+		exit (0);
+	printf("(x,y) : (%d, %d)\n", param->x, param->y);
+	return (0);
+}
+
+int	main(int ac, char **av)
+{
+	t_info info;
+
+	if (ac != 2)
+		printf("No Map!!\n");
+	info = (t_info)malloc(sizeof(t_info));
+	info_init(&info);
 	
+
+	return (0);
 }
