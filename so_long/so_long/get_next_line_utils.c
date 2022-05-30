@@ -6,7 +6,7 @@
 /*   By: kokim <kim258199@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 19:50:12 by kokim             #+#    #+#             */
-/*   Updated: 2022/01/06 19:22:42 by kokim            ###   ########.fr       */
+/*   Updated: 2022/05/30 16:54:42 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 size_t	ft_strlen(const char *s)
 {
-	size_t	cnt;
+	int	cnt;
 
 	cnt = 0;
 	while (s[cnt] != '\0')
@@ -52,14 +52,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size_t	s1_len;
 
 	i = 0;
-	/*
-	if (s1 == NULL && s2 == NULL)
-		return (0);
-	if (s1 == NULL)
-		return (ft_strdup(s2));
-	if (s2 == NULL)
-		return (ft_strdup(s1));
-		*/
 	s1_len = ft_strlen(s1);
 	len = s1_len + ft_strlen(s2);
 	join = (char *)malloc(sizeof(char) * len + 1);
@@ -77,17 +69,20 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (join);
 }
 
-char	*ft_strchr(const char *s, int c)
+int	ft_strchr(const char *s, int c)
 {
+	int	i;
+
+	i = 0;
 	while (*s)
 	{
 		if (*s == (char)c)
-			return ((char *)s);
+			i++;
 		s++;
 	}
 	if (c == '\0')
-		return ((char *)s);
-	return (0);
+		return (0);
+	return (i);
 }
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
