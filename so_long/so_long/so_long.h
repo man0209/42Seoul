@@ -6,7 +6,7 @@
 /*   By: kokim <kokim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 11:33:10 by kokim             #+#    #+#             */
-/*   Updated: 2022/05/30 15:49:22 by kokim            ###   ########.fr       */
+/*   Updated: 2022/05/31 12:09:36 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,17 @@ typedef struct s_info
 {
 	void	*mlx;
 	void	*new_window;
-	char	*str_from_map;
+	char	*last_str;
 	int		height;
 	int		width;
 	int		player_count;
-} t_info;
+	int		coin_count;
+	int		exit_count;
+}	t_info;
 
-void	check_map_size(t_info *info, char *str);
-void	info_init(t_info *info);
-void	check_player(t_info *info, char *str, int fd);
+void	read_map(t_info *info, char *file_name);
+void	info_init(t_info *info, char *file_name);
+void	check_values(t_info *info, char *str);
+void	check_walls(t_info *info, char *str, int fd);
+void	print_error(t_info *info, int flag, int fd);
 #endif

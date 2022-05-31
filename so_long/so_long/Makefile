@@ -6,7 +6,7 @@
 #    By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/04 13:11:14 by kokim             #+#    #+#              #
-#    Updated: 2022/05/30 14:21:49 by kokim            ###   ########.fr        #
+#    Updated: 2022/05/31 12:10:46 by kokim            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CFLAGS	= -Wall -Wextra -Werror
 
 RM	= rm -rf
 
-SRC = main.c check_map_size.c get_next_line.c get_next_line_utils.c
+SRC = main.c read_map.c print_error.c get_next_line.c get_next_line_utils.c
 
 OBJ = $(SRC:.c=.o)
 
