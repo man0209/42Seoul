@@ -6,7 +6,7 @@
 /*   By: kokim <kokim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 11:33:10 by kokim             #+#    #+#             */
-/*   Updated: 2022/05/31 12:09:36 by kokim            ###   ########.fr       */
+/*   Updated: 2022/05/31 15:13:13 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ typedef struct s_info
 
 void	read_map(t_info *info, char *file_name);
 void	info_init(t_info *info, char *file_name);
-void	check_values(t_info *info, char *str);
-void	check_walls(t_info *info, char *str, int fd);
+void	check_values(t_info *info);
+void	check_walls(t_info *info, int fd);
 void	print_error(t_info *info, int flag, int fd);
+void	check_errors(t_info *info, int fd);
 #endif
