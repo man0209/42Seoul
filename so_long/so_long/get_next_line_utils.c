@@ -6,13 +6,13 @@
 /*   By: kokim <kim258199@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 19:50:12 by kokim             #+#    #+#             */
-/*   Updated: 2022/05/30 16:54:42 by kokim            ###   ########.fr       */
+/*   Updated: 2022/06/02 18:45:41 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_strlen(const char *s)
 {
 	int	cnt;
 
@@ -85,10 +85,10 @@ int	ft_strchr(const char *s, int c)
 	return (i);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, int start, size_t len)
 {
 	char	*substr;
-	size_t	i;
+	int		i;
 
 	i = 0;
 	if (s == NULL)

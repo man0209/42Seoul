@@ -6,7 +6,7 @@
 /*   By: kokim <kokim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 11:54:18 by kokim             #+#    #+#             */
-/*   Updated: 2022/05/31 15:36:02 by kokim            ###   ########.fr       */
+/*   Updated: 2022/06/02 20:00:53 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 void	info_init(t_info *info, char *file_name)
 {
 	info->mlx = mlx_init();
-	info->last_str = NULL;
+	info->all_str = NULL;
+	info->upper_str = NULL;
+	info->middle_str = NULL;
+	info->lower_str = NULL;
 	info->height = 0;
 	info->width = 0;
 	info->player_count = 0;
@@ -32,6 +35,7 @@ int	main(int ac, char **av)
 		printf("No Map!!\n");
 	info = (t_info *)malloc(sizeof(t_info));
 	info_init(info, av[1]);
+	printf("\nlast check : %s, len : %d", info->all_str, ft_strlen(info->all_str));
 	//system("leaks so_long");
 	return (0);
 }

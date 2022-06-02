@@ -6,35 +6,26 @@
 /*   By: kokim <kokim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 11:12:03 by kokim             #+#    #+#             */
-/*   Updated: 2022/05/31 15:52:40 by kokim            ###   ########.fr       */
+/*   Updated: 2022/06/02 18:22:11 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	check_errors(t_info *info, int fd)
+void	check_errors(t_info *info)
 {
-	int	len;
-	int	cnt;
 
-	len = ft_strlen(info->last_str) - 1;
-	cnt = ft_strchr(info->last_str, '1');
 	if (info->player_count != 1)
-		print_error(info, 2, fd);
+		print_error(info, 2);
 	else if (info->coin_count == 0)
-		print_error(info, 3, fd);
+		print_error(info, 3);
 	else if (info->exit_count == 0)
-		print_error(info, 4, fd);
-	else if (len != cnt)
-	{
-		printf("len : %d, cnt : %d, str: %s\n", len, cnt, info->last_str);
-		print_error(info, 5, fd);
-	}
+		print_error(info, 4);
 	else if (info->height == info->width)
-		print_error(info, 1, fd);
+		print_error(info, 1);
 }
 
-void	print_error(t_info *info, int flag, int fd)
+void	print_error(t_info *info, int flag)
 {
 	if (flag == 1)
 		printf("not rectangle!!!\n");
@@ -46,7 +37,12 @@ void	print_error(t_info *info, int flag, int fd)
 		printf("Exit error!!\n");
 	else if (flag == 5)
 		printf("Wall error!!\n");
+	else if (flag == 6)
+		printf("Characters error!!\n");
+	else if (flag == 7)
+		printf("Object is surrounded!!\n");
+	free(info->all_str);
 	free(info);
-	close(fd);
+	close(info->fd);
 	exit(1);
 }

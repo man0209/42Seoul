@@ -6,7 +6,7 @@
 /*   By: kokim <kim258199@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 19:50:15 by kokim             #+#    #+#             */
-/*   Updated: 2022/05/30 15:32:50 by kokim            ###   ########.fr       */
+/*   Updated: 2022/06/02 17:40:58 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@
 # endif
 
 char		*get_next_line(int fd);
-size_t		ft_strlen(const char *s);
+int			ft_strlen(const char *s);
 char		*ft_strjoin(char const *s1, char const *s2);
 char		*ft_strdup(const char *s1);
-char		*ft_substr(char const *s, unsigned int start, size_t len);
+char		*ft_substr(char const *s, int start, size_t len);
 int			ft_strchr(const char *s, int c);
 #endif
