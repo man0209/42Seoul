@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kokim <kokim@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 11:33:10 by kokim             #+#    #+#             */
-/*   Updated: 2022/06/02 19:01:36 by kokim            ###   ########.fr       */
+/*   Updated: 2022/06/04 00:42:06 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,7 @@ typedef struct s_info
 {
 	void	*mlx;
 	void	*new_window;
-	char	*all_str;
-	char	*upper_str;
-	char	*middle_str;
-	char	*lower_str;
+	char	**all_str;
 	int		height;
 	int		width;
 	int		player_count;
@@ -49,4 +46,5 @@ void	print_error(t_info *info, int flag);
 void	check_errors(t_info *info);
 char	*ft_strjoin_with_no_lines(t_info *info, char *str);
 void	cut_all_str(t_info *info);
+void	make_array(t_info *info, char *file_name);
 #endif

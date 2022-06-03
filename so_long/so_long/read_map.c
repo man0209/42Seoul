@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map_size.c                                   :+:      :+:    :+:   */
+/*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kokim <kokim@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 10:47:50 by kokim             #+#    #+#             */
-/*   Updated: 2022/06/02 19:08:29 by kokim            ###   ########.fr       */
+/*   Updated: 2022/06/04 00:27:08 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ void	read_map(t_info *info, char *file_name)
 	while (tmp != NULL)
 	{
 		check_tmp(info, tmp);
-		info->all_str = ft_strjoin_with_no_lines(info, tmp);
 		check_walls(info, tmp);
 		check_values(info, tmp);
 		check_rectangle(info, tmp);
@@ -97,8 +96,8 @@ void	read_map(t_info *info, char *file_name)
 		tmp = get_next_line(fd);
 		info->height++;
 	}
+	make_array(info, file_name);
 	check_errors(info);
 	printf("height : %d\n", info->height);
-	cut_all_str(info);
 	
 }
