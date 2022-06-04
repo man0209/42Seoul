@@ -6,7 +6,7 @@
 /*   By: kokim <kokim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 11:12:03 by kokim             #+#    #+#             */
-/*   Updated: 2022/06/02 18:22:11 by kokim            ###   ########.fr       */
+/*   Updated: 2022/06/04 15:40:03 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	check_errors(t_info *info)
 		print_error(info, 2);
 	else if (info->coin_count == 0)
 		print_error(info, 3);
-	else if (info->exit_count == 0)
+	else if (info->exit_count != 1)
 		print_error(info, 4);
 	else if (info->height == info->width)
 		print_error(info, 1);
@@ -41,7 +41,8 @@ void	print_error(t_info *info, int flag)
 		printf("Characters error!!\n");
 	else if (flag == 7)
 		printf("Object is surrounded!!\n");
-	free(info->all_str);
+	else if (flag == 8)
+		printf("GNL error!!\n");
 	free(info);
 	close(info->fd);
 	exit(1);

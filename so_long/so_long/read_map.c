@@ -6,13 +6,13 @@
 /*   By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 10:47:50 by kokim             #+#    #+#             */
-/*   Updated: 2022/06/04 00:27:08 by kokim            ###   ########.fr       */
+/*   Updated: 2022/06/04 15:39:53 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void	check_values(t_info *info, char *str)
+static void	count_values(t_info *info, char *str)
 {
 	int		tmp;
 
@@ -51,7 +51,7 @@ static void	check_rectangle(t_info *info, char *str)
 		print_error(info, 1);
 }
 
-static void	check_tmp(t_info *info, char *str)
+static void	check_values(t_info *info, char *str)
 {
 	int	i;
 
@@ -60,17 +60,7 @@ static void	check_tmp(t_info *info, char *str)
 	{
 		if (str[i] != '1' && str[i] != '0' && str[i] != 'C' &&\
 				str[i] != 'E' && str[i] != 'P' && str[i] != '\n')  
-		{
-			if (info->all_str != NULL)
-				print_error(info, 6);
-			else
-			{
-				printf("Characters error!!\n");
-				free(info);
-				close(info->fd);
-				exit(1);
-			}
-		}
+			print_error(info, 6);
 		i++;
 	}
 }			
@@ -84,20 +74,23 @@ void	read_map(t_info *info, char *file_name)
 	if (fd < 0)
 		return ;
 	tmp = get_next_line(fd);
+	if (tmp == NULL)
+		print_error(info, 8);
 	info->width = ft_strlen(tmp) - 1;
 	info->fd = fd;
 	while (tmp != NULL)
 	{
-		check_tmp(info, tmp);
-		check_walls(info, tmp);
 		check_values(info, tmp);
+		check_walls(info, tmp);
+		count_values(info, tmp);
 		check_rectangle(info, tmp);
+	printf("tmp : %s", tmp);
 		free(tmp);
 		tmp = get_next_line(fd);
 		info->height++;
 	}
-	make_array(info, file_name);
 	check_errors(info);
-	printf("height : %d\n", info->height);
-	
+	close(fd);
+	make_array(info, file_name);
+	printf("height : %d, width : %d\n", info->height, info->width);
 }

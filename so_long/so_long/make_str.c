@@ -6,11 +6,12 @@
 /*   By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 13:39:32 by kokim             #+#    #+#             */
-/*   Updated: 2022/06/04 01:16:05 by kokim            ###   ########.fr       */
+/*   Updated: 2022/06/04 18:12:53 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
 
 static int	ft_strchr_index(const char *s, int c, int index)
 {
@@ -28,41 +29,62 @@ static int	ft_strchr_index(const char *s, int c, int index)
 	return (0);
 }
 
-void	find_check_char(t_info *info, int index, char c)
+void	find_check_char(t_info *info, int index, char c, int count)
 {
-	int	i;
-	int	count;
+	int		i;
+	int		tmp;
+	char	*str;
+	char	*upper_str;
+	char	*lower_str;
 
-	i = index;
-	count = ft_strchr(info->all_str[i], c);
+	str = info->all_str[index];
+	i = ft_strchr_index(str, c, index);
+	upper_str = info->all_str[index - 1];
+	lower_str = info->all_str[index + 1];
 	while (count)
 	{
-		//한 줄에 코인이 한 개 이상일 때 첫번째 코인을 확인 후 두번 째 코인 확인하는 방법
+		if (str[i - 1] == '1' && str[i + 1] == '1' &&\
+				upper_str[i] == '1' && lower_str[i] == '1')
+				print_error(info, 7);
+		if (count > 1)
+		{
+			tmp = i;
+			i = ft_strchr_index(str, c, tmp + 1);
+		}
+		count--;
 	}
 	
 }
 
-void	check_surrounded(t_info *info)
+static void	check_surrounded(t_info *info)
 {
 	int	count;
 	int	i;
 
 	i = 1;
-	count = 0;
 	while (i < info->height - 1)
 	{
-		find_check_char(info, i, 'P');
+		count = ft_strchr(info->all_str[i], 'P');
+		if (count)
+			find_check_char(info, i, 'P', count);
+		count = ft_strchr(info->all_str[i], 'E');
+		if (count)
+			find_check_char(info, i, 'E', count);
+		count = ft_strchr(info->all_str[i], 'C');
+		if (count)
+			find_check_char(info, i, 'C', count);
+		i++;
 	}
 }
 
-void	check_last_wall(t_info *info)
+static void	check_last_wall(t_info *info)
 {
 	int		len;
 	int		count;
 	char	*tmp;
 
 	tmp = info->all_str[info->height - 1];
-	len = ft_strlen(tmp);
+	len = ft_strlen(tmp) - 1;
 	count = ft_strchr(tmp, '1');
 	if (len != count)
 		print_error(info, 5);
@@ -83,8 +105,7 @@ void	make_array(t_info *info, char *file_name)
 		return ;
 	while (i < info->height)
 	{
-		/* 개행 + \0 */
-		info->all_str[i] = (char *)malloc(sizeof(char) * info->width + 2);
+		info->all_str[i] = (char *)malloc(sizeof(char) * (info->width + 2));
 		if (info->all_str[i] == NULL)
 			return ;
 		tmp = get_next_line(fd);
@@ -92,7 +113,12 @@ void	make_array(t_info *info, char *file_name)
 		free(tmp);
 		i++;
 	}
+	for(int i = 0; i < info->height; i++)
+	{
+		printf("%c,..... all_str[%d] = %s", info->all_str[i][info->width],i, info->all_str[i]);
+	}
 	check_last_wall(info);
+	check_surrounded(info);
 	close(fd);
 }
 
