@@ -6,7 +6,7 @@
 /*   By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 10:47:50 by kokim             #+#    #+#             */
-/*   Updated: 2022/06/04 15:39:53 by kokim            ###   ########.fr       */
+/*   Updated: 2022/06/05 16:11:25 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	read_map(t_info *info, char *file_name)
 		check_walls(info, tmp);
 		count_values(info, tmp);
 		check_rectangle(info, tmp);
-	printf("tmp : %s", tmp);
+		printf("tmp : %s", tmp);
 		free(tmp);
 		tmp = get_next_line(fd);
 		info->height++;

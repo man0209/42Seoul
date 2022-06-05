@@ -6,7 +6,7 @@
 #    By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/04 13:11:14 by kokim             #+#    #+#              #
-#    Updated: 2022/06/02 14:12:32 by kokim            ###   ########.fr        #
+#    Updated: 2022/06/05 21:22:11 by kokim            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,12 @@ CFLAGS	= -Wall -Wextra -Werror
 
 RM	= rm -rf
 
-SRC = main.c read_map.c print_error.c make_str.c get_next_line.c get_next_line_utils.c
+SRC = main.c read_map.c \
+	  print_error.c     \
+	  make_str.c        \
+	  get_next_line.c   \
+	  get_next_line_utils.c \
+	  ft_strcpy.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -30,7 +35,7 @@ LIBFT_LNK = -L $(LIBFT_DIR) -lft
 all : $(NAME)
 
 $(NAME) : $(OBJ)
-	$(CC) $(CFLAGS) $(MLX_LNK) $(LIBFT_LNK) $^ -o $@
+	$(CC) $(CFLAGS)  $^ -o $@
 
 %.o : %.c
 	@$(CC) $(CFLAGS) $< -c -o $@ 

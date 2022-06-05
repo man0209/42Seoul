@@ -6,11 +6,12 @@
 /*   By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 13:39:32 by kokim             #+#    #+#             */
-/*   Updated: 2022/06/04 18:12:53 by kokim            ###   ########.fr       */
+/*   Updated: 2022/06/05 21:21:18 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+#include "string.h"
 
 
 static int	ft_strchr_index(const char *s, int c, int index)
@@ -38,7 +39,7 @@ void	find_check_char(t_info *info, int index, char c, int count)
 	char	*lower_str;
 
 	str = info->all_str[index];
-	i = ft_strchr_index(str, c, index);
+	i = ft_strchr_index(str, c, 0);
 	upper_str = info->all_str[index - 1];
 	lower_str = info->all_str[index + 1];
 	while (count)
@@ -94,7 +95,7 @@ void	make_array(t_info *info, char *file_name)
 {
 	int		fd;
 	int		i;
-	char	*tmp;
+	char	*gnl;
 
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
@@ -105,17 +106,17 @@ void	make_array(t_info *info, char *file_name)
 		return ;
 	while (i < info->height)
 	{
-		info->all_str[i] = (char *)malloc(sizeof(char) * (info->width + 2));
+		info->all_str[i] = (char *)malloc(sizeof(char));
 		if (info->all_str[i] == NULL)
 			return ;
-		tmp = get_next_line(fd);
-		info->all_str[i] = tmp;
-		free(tmp);
+		gnl = get_next_line(fd);
+		ft_strcpy(info->all_str[i], gnl);
+		free(gnl);
 		i++;
 	}
 	for(int i = 0; i < info->height; i++)
 	{
-		printf("%c,..... all_str[%d] = %s", info->all_str[i][info->width],i, info->all_str[i]);
+		printf("all_str[%d] = %s",i, info->all_str[i]);
 	}
 	check_last_wall(info);
 	check_surrounded(info);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kokim <kokim@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 11:54:18 by kokim             #+#    #+#             */
-/*   Updated: 2022/06/04 15:40:06 by kokim            ###   ########.fr       */
+/*   Updated: 2022/06/05 16:10:50 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	info_init(t_info *info, char *file_name)
 {
-	info->mlx = mlx_init();
+	//info->mlx = mlx_init();
 	info->all_str = NULL;
 	info->height = 0;
 	info->width = 0;
