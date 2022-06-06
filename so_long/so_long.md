@@ -65,3 +65,33 @@ free(tmp);
 맥 OS에서는 정상 출력 됬던 것 같다. 
 하지만 a = tmp 시 a 에 tmp의 주소가 복사가 되고, 즉 malloc으로 할당한 주소가 사라지고 tmp의 주소가 복사가 된다(큰 착각이었다). free(tmp)했을 경우 tmp의 값이 사라지고 a 에는 tmp의 주소가 그대로 있으니 a를 출력하면 tmp의 주소를 역참조 해서 해당 값을 출력하게 되므로 사라진 값이 출력이 된다.
 따라서 a에 tmp의 값을 복사하고 싶으면 strcat등 함수를 이용해 말록으로 할당된 주소에 데이터 하나 하나를 복사하는 방식으로 접근해야 한다. 아직 멀었다 아아아아아.
+
+- 맵 파싱하는 부분은 끝났고 이제 들어오는 맵에 따라 이미지를 디스플레이에 출력하는 과정을 수도코딩해보자.
+- info_init함수에서 info->mlx = mlx_init()으로 클라이언트와 디스플레이 연결시키고
+- info->new_window = mlx_new_window(info->mlx, info->width, info->height, "so_long")으로 디스플레이에 새로운 윈도우를 띄운다.
+- 그리고 info->all_str의 2차원배열의 첫줄부터 읽으면서 이미지를 파싱하는 함수를 만든다.
+```
+int i = 0;
+int j = 0;
+while (i < info->height)
+{
+  while (info->all_str[i] != '\n')
+  {
+    if (all_str[i][j] == '1')
+      벽 출력
+    else if (all_str[i][j] == '0')
+      땅 출력
+    else if (all_str[i][j] == 'P')
+      플레이어 출력
+    else if (all_str[i][j] == 'C')
+      코인 출력
+    else if (all_str[i][j] == 'E')
+      출구 출력
+     j++
+    }
+   i++
+ }
+ ```
+ -  그 다음 wasd를 눌렀을 때 적절히 움직이는 것 구현
+ -  추가로 벽을 향해 움직이면 움직이지 않고, 수집품을 다 먹고 출구를 가면 클리어 하는 것 구현
+ -  움직일 때마다 이미지를 다시 띄워주면서 자연스럽게 움직이도록 만들면 된다.
