@@ -44,7 +44,9 @@
 
 # void *mlx_xpm_file_to_image(void *mlx_ptr, char *filename, int *width, int *height)
   - mlx 포인터, 파일 주소, 가로 세로 크기를 가져와서 메모리에 올리고 해당 메모리의 주소를 반환한다.
+  - width 와 height은 이미지를 불러오게 되면서 얻게되는 정보. 즉 이미지의 크기가 다르거나, 크기를 통해 전체 해상도를 구하는 등에서 사용이 가능.
 
 # int mlx_put_image_to_window(void *mlx_ptr, void *win_ptr, void *img_ptr, int x, int y);
   - 이미지를 받아서 띄울 포인터들을 인자로 받고 윈도우 안에서의 좌표를 지정해서 해당 윈도우에 띄워준다.
   - img_ptr : 사용할 이미지
+  - x, y : 이미지가 위치할 창 내의 x, y 좌표

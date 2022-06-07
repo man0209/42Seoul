@@ -6,7 +6,7 @@
 /*   By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 10:47:50 by kokim             #+#    #+#             */
-/*   Updated: 2022/06/05 16:11:25 by kokim            ###   ########.fr       */
+/*   Updated: 2022/06/07 22:35:29 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void	check_values(t_info *info, char *str)
 			print_error(info, 6);
 		i++;
 	}
-}			
+}
 
 void	read_map(t_info *info, char *file_name)
 {

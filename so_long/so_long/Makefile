@@ -6,7 +6,7 @@
 #    By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/04 13:11:14 by kokim             #+#    #+#              #
-#    Updated: 2022/06/05 21:22:11 by kokim            ###   ########.fr        #
+#    Updated: 2022/06/07 23:34:25 by kokim            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,9 @@ SRC = main.c read_map.c \
 	  make_str.c        \
 	  get_next_line.c   \
 	  get_next_line_utils.c \
-	  ft_strcpy.c
+	  ft_strcpy.c \
+	  image.c \
+	  keys.c
 
 OBJ = $(SRC:.c=.o)
 
