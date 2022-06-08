@@ -6,7 +6,7 @@
 /*   By: kokim <kim258199@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 15:01:05 by kokim             #+#    #+#             */
-/*   Updated: 2022/05/30 14:29:18 by kokim            ###   ########.fr       */
+/*   Updated: 2022/06/08 14:02:11 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-# include "../so_long/get_next_line.h"
+# include "../get_next_line.h"
 
 typedef struct s_list
 {

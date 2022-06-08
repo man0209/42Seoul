@@ -6,7 +6,7 @@
 /*   By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 11:54:18 by kokim             #+#    #+#             */
-/*   Updated: 2022/06/07 23:33:49 by kokim            ###   ########.fr       */
+/*   Updated: 2022/06/08 15:14:11 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,32 +19,34 @@ static void	info_init(t_info *info, char *file_name)
 	info->img = init_img(info->mlx);
 	info->height = 0;
 	info->width = 0;
+	info->walk_count = 0;
 	info->player_count = 0;
 	info->coin_count = 0;
 	info->exit_count = 0;
 	info->fd = 0;
 	read_map(info, file_name);
-	info->new_window = mlx_new_window(info->mlx, info->width * 64,\
+	info->new_window = mlx_new_window(info->mlx, info->width * 64, \
 	info->height * 64, "so_long");
 	set_image(info);
 }
 
-static int	exit_game(t_info *info)
+int	exit_game(t_info *info)
 {
 	int	i;
 
 	i = 0;
+	printf("you pressed down ESC OR Red BTN \n");
 	mlx_destroy_window(info->mlx, info->new_window);
-	free(info->img);
 	while (i < info->height)
 	{
 		free(info->all_str[i]);
+		i++;
 	}
 	free(info->all_str);
 	exit (0);
 }
 
-static int	press_key(t_info *info, int key_code)
+int	press_key(int key_code, t_info *info)
 {
 	if (key_code == KEY_W)
 		move_w(info);
@@ -64,14 +66,14 @@ int	main(int ac, char **av)
 	t_info	*info;
 
 	if (ac != 2)
+	{
 		printf("No Map!!\n");
+		return (1);
+	}
 	info = (t_info *)malloc(sizeof(t_info));
 	info_init(info, av[1]);
-	mlx_hook(info->new_window, X_EVENT_KEY_PRESS, 0, &press_key, info);
-	mlx_hook(info->new_window, X_EVENT_DESTROY, 0, &exit_game, info);
+	mlx_hook(info->new_window, 2, 0, &press_key, info);
+	mlx_hook(info->new_window, 17, 0, &exit_game, info);
 	mlx_loop(info->mlx);
-	/* check leaks
-	system("leaks so_long");
-	*/
 	return (0);
 }

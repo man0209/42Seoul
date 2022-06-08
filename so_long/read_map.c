@@ -6,7 +6,7 @@
 /*   By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 10:47:50 by kokim             #+#    #+#             */
-/*   Updated: 2022/06/07 22:35:29 by kokim            ###   ########.fr       */
+/*   Updated: 2022/06/08 12:00:42 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,11 @@ static void	check_values(t_info *info, char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] != '1' && str[i] != '0' && str[i] != 'C' &&\
-				str[i] != 'E' && str[i] != 'P' && str[i] != '\n')  
+		if (str[i] != '1' && str[i] != '0' && str[i] != 'C'\
+				&& str[i] != 'E' && str[i] != 'P' && str[i] != '\n')
+		{
 			print_error(info, 6);
+		}
 		i++;
 	}
 }
@@ -84,7 +86,6 @@ void	read_map(t_info *info, char *file_name)
 		check_walls(info, tmp);
 		count_values(info, tmp);
 		check_rectangle(info, tmp);
-		printf("tmp : %s", tmp);
 		free(tmp);
 		tmp = get_next_line(fd);
 		info->height++;
@@ -92,5 +93,4 @@ void	read_map(t_info *info, char *file_name)
 	check_errors(info);
 	close(fd);
 	make_array(info, file_name);
-	printf("height : %d, width : %d\n", info->height, info->width);
 }

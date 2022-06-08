@@ -3,38 +3,59 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kokim <kokim@student.42.fr>                +#+  +:+       +#+         #
+#    By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/05/26 12:53:27 by kokim             #+#    #+#              #
-#    Updated: 2022/05/30 14:17:41 by kokim            ###   ########.fr        #
+#    Created: 2022/04/04 13:11:14 by kokim             #+#    #+#              #
+#    Updated: 2022/06/08 14:45:59 by kokim            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long 
 
-SO_LONG_DIR = ./so_long/
+CC	= gcc
+CFLAGS	= -Wall -Wextra -Werror
+
+RM	= rm -rf
+
+SRC = main.c \
+	  read_map.c \
+	  print_error.c     \
+	  make_str.c        \
+	  get_next_line.c   \
+	  get_next_line_utils.c \
+	  ft_strcpy.c \
+	  image.c \
+	  keys.c
+
+OBJ = $(SRC:.c=.o)
 
 MLX_DIR = ./mlx/
 
-LIBFT = ./libft/
+MLX_LNK = -L ./mlx -lmlx
 
-all :
-	@make -C $(MLX_DIR)
-	@make -C $(LIBFT)
-	@make -C $(SO_LONG_DIR)
-	@echo "$(NAME) was compiled!!"
+LIBFT_DIR = ./libft/
 
+LIBFT_LNK = -L $(LIBFT_DIR) -lft
+
+all : $(NAME)
+
+$(NAME) : $(OBJ)
+	@make all -C $(LIBFT_DIR)
+	@make all -C $(MLX_DIR)
+	$(CC) $(CFLAGS) $(LIBFT_LNK) $(MLX_LNK) $^ -o $@
+
+%.o : %.c
+	@$(CC) $(CFLAGS) $< -c -o $@ 
 clean :
+	@make -C $(LIBFT_DIR) clean
 	@make -C $(MLX_DIR) clean
-	@make -C $(LIBFT) clean
-	@make -C $(SO_LONG_DIR) clean
-	@echo "$(NAME)'s object files was deleted!!"
+	@$(RM) $(OBJ) libmlx.dylib
 
-fclean : 
+
+fclean : clean
+	@make -C $(LIBFT_DIR) fclean
 	@make -C $(MLX_DIR) fclean
-	@make -C $(LIBFT) fclean
-	@make -C $(SO_LONG_DIR) fclean
-	@echo "$(NAME) was deleted!!"
+	@$(RM) $(NAME)
 
 re : fclean all
 

@@ -6,15 +6,13 @@
 /*   By: kokim <kokim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 13:39:32 by kokim             #+#    #+#             */
-/*   Updated: 2022/06/05 21:21:18 by kokim            ###   ########.fr       */
+/*   Updated: 2022/06/08 12:49:11 by kokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include "string.h"
 
-
-static int	ft_strchr_index(const char *s, int c, int index)
+int	ft_strchr_index(const char *s, int c, int index)
 {
 	int	i;
 
@@ -30,7 +28,7 @@ static int	ft_strchr_index(const char *s, int c, int index)
 	return (0);
 }
 
-void	find_check_char(t_info *info, int index, char c, int count)
+static void	find_check_char(t_info *info, int index, char c, int count)
 {
 	int		i;
 	int		tmp;
@@ -44,9 +42,12 @@ void	find_check_char(t_info *info, int index, char c, int count)
 	lower_str = info->all_str[index + 1];
 	while (count)
 	{
-		if (str[i - 1] == '1' && str[i + 1] == '1' &&\
+		tmp = 0;
+		if (str[i - 1] == '1' && str[i + 1] == '1' && \
 				upper_str[i] == '1' && lower_str[i] == '1')
-				print_error(info, 7);
+		{
+			free_all_str(info, 0);
+		}
 		if (count > 1)
 		{
 			tmp = i;
@@ -54,7 +55,6 @@ void	find_check_char(t_info *info, int index, char c, int count)
 		}
 		count--;
 	}
-	
 }
 
 static void	check_surrounded(t_info *info)
@@ -88,7 +88,9 @@ static void	check_last_wall(t_info *info)
 	len = ft_strlen(tmp) - 1;
 	count = ft_strchr(tmp, '1');
 	if (len != count)
-		print_error(info, 5);
+	{
+		free_all_str(info, 1);
+	}
 }
 
 void	make_array(t_info *info, char *file_name)
@@ -106,7 +108,7 @@ void	make_array(t_info *info, char *file_name)
 		return ;
 	while (i < info->height)
 	{
-		info->all_str[i] = (char *)malloc(sizeof(char));
+		info->all_str[i] = (char *)malloc(sizeof(char) * info->width + 2);
 		if (info->all_str[i] == NULL)
 			return ;
 		gnl = get_next_line(fd);
@@ -114,12 +116,7 @@ void	make_array(t_info *info, char *file_name)
 		free(gnl);
 		i++;
 	}
-	for(int i = 0; i < info->height; i++)
-	{
-		printf("all_str[%d] = %s",i, info->all_str[i]);
-	}
 	check_last_wall(info);
 	check_surrounded(info);
 	close(fd);
 }
-

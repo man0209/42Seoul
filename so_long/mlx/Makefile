@@ -20,7 +20,7 @@ all: $(NAME)
 
 $(NAME): $(MODULE_OBJ) $(OBJ) $(C_OBJ)
 	@swiftc $(OPTI) $(INC) -o $(NAME) -emit-library $(OBJ) $(C_OBJ) -lz
-	@cp libmlx.dylib ../so_long/
+	@cp libmlx.dylib ../
 
 %.o: %.swift
 	@swiftc $(OPTI) $(INC) -parse-as-library -c $< -o $@
